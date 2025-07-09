@@ -8,8 +8,11 @@ import instagram from "../../assets/icons/instagram (1).png";
 import Twitter from "../../assets/icons/twitter.png";
 import Telegram from "../../assets/icons/telegram.png";
 import { FaCartArrowDown } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
+  const { totalQuantity } = useSelector((state) => state.cart);
   return (
     <footer class="bg-white">
       <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 ">
@@ -144,11 +147,12 @@ const Footer = () => {
         <div className="bg-gradient-to-r from-violet-100 to-pink-100 rounded-xl shadow-2xl p-3 mx-4 mb-4">
           <div className="flex justify-between items-center">
             <div className="text-center">
+              <p>{totalQuantity}</p>
               <FaCartArrowDown className="text-2xl text-gray-700" />
-              <p className="text-sm">Cart 1</p>
+              <p className="text-sm">Cart</p>
             </div>
             <div className="text-center">
-              <FaCartArrowDown className="text-2xl text-gray-700" />
+              <FaHeart className="text-2xl text-gray-700" />
               <p className="text-sm">Cart 2</p>
             </div>
             <div className="text-center">
