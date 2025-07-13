@@ -146,15 +146,15 @@ const Footer = () => {
       <div className="fixed bottom-0 left-0 right-0 z-50 block md:hidden">
         <div className="bg-gradient-to-r from-violet-100 to-pink-100 rounded-xl shadow-2xl p-3 mx-4 mb-4">
           <div className="flex justify-between items-center">
-            <div className="text-center">
+            <Link to="/cart" className="text-center cursor-pointer">
               <p>{totalQuantity}</p>
               <FaCartArrowDown className="text-2xl text-gray-700" />
               <p className="text-sm">Cart</p>
-            </div>
-            <div className="text-center">
+            </Link>
+            <Link to="/watchList" className="text-center">
               <FaHeart className="text-2xl text-gray-700" />
               <p className="text-sm">Cart 2</p>
-            </div>
+            </Link>
             <div className="text-center">
               <FaCartArrowDown className="text-2xl text-gray-700" />
               <p className="text-sm">Cart 3</p>
