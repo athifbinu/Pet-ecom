@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 
 const Footer = () => {
   const { totalQuantity } = useSelector((state) => state.cart);
+  const { totellikeQuantity } = useSelector((state) => state.like);
+
   return (
     <footer class="bg-white">
       <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 ">
@@ -149,19 +151,16 @@ const Footer = () => {
             <Link to="/cart" className="text-center cursor-pointer">
               <p>{totalQuantity}</p>
               <FaCartArrowDown className="text-2xl text-gray-700" />
-              <p className="text-sm">Cart</p>
             </Link>
             <Link to="/watchList" className="text-center">
+              {totellikeQuantity}
               <FaHeart className="text-2xl text-gray-700" />
-              <p className="text-sm">Cart 2</p>
             </Link>
             <div className="text-center">
               <FaCartArrowDown className="text-2xl text-gray-700" />
-              <p className="text-sm">Cart 3</p>
             </div>
             <div className="text-center">
               <FaCartArrowDown className="text-2xl text-gray-700" />
-              <p className="text-sm">Cart 4</p>
             </div>
           </div>
         </div>

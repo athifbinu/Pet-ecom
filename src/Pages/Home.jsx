@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/images/mane.png";
-import aboutImage from "../assets/images/about.png";
+import aboutImage from "../assets/images/aboutus.png";
 import test from "../assets/categoys/7413369.png";
 import test1 from "../assets/categoys/7413375.png";
 import CategorysCard from "../components/Ui/CategorysCard";
@@ -146,7 +146,7 @@ const Home = () => {
             {/* Image Section */}
             <div className="w-full">
               <img
-                className="sm:h-1/2 sm:w-64 md:h-1/2 md:w-1/2"
+                className="rounded-lg shadow-xl"
                 src={aboutImage}
                 alt="About Us"
               />
