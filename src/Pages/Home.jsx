@@ -146,7 +146,7 @@ const Home = () => {
             {/* Image Section */}
             <div className="w-full">
               <img
-                className="rounded-lg shadow-xl"
+                className="rounded-lg shadow-md"
                 src={aboutImage}
                 alt="About Us"
               />
@@ -184,22 +184,7 @@ const Home = () => {
                 Explore Categories
               </h3>
               <Slider {...sliderSettings}>
-                {mainCategories.map((category, index) => (
-                  <div key={index} className="px-3">
-                    <div className="bg-slate-300 rounded-full p-2">
-                      <div className="text-center rounded-md">
-                        <img
-                          className="w-32 mx-auto"
-                          src={category.image}
-                          alt=""
-                        />
-                        <h2 className="mt-4 text-black font-bold">
-                          {category.name}
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                <div></div>
               </Slider>
             </div>
           )}

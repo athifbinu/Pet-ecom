@@ -4,6 +4,8 @@ import { cartActions } from "../../Redux/Slices/CartSlice";
 import { likeActions } from "../../Redux/Slices/LikeSlice";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import "animate.css";
 
 const ProductCard = ({ item }) => {
   const dispatch = useDispatch();
@@ -13,6 +15,26 @@ const ProductCard = ({ item }) => {
 
   const addToCart = () => {
     dispatch(cartActions.addItem(item));
+
+    Swal.fire({
+      title: "🎉 Added to Cart!",
+      text: `${item.name} has been added successfully.`,
+      icon: "success",
+      confirmButtonText: "OK",
+      background: "#f9fafb",
+      confirmButtonColor: "#2563eb",
+      customClass: {
+        popup: "rounded-xl shadow-lg",
+      },
+      timer: 2000,
+      timerProgressBar: true,
+      showClass: {
+        popup: "animate__animated animate__fadeInDown",
+      },
+      hideClass: {
+        popup: "animate__animated animate__fadeOutUp",
+      },
+    });
   };
 
   const toggleWatchlist = () => {
