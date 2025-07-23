@@ -16,9 +16,17 @@ import Star from "../assets/icons/review.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaCartArrowDown } from "react-icons/fa6";
 
-import testimg from "../assets/categoys/dogCategoryimage.jpg";
+import sliderone from "../assets/images/dogfood.jpeg";
+import slidertwo from "../assets/images/cages.jpeg";
+import sliderthree from "../assets/images/treats.jpeg";
+import sliderfoor from "../assets/images/grooming.jpeg";
+import sliderfive from "../assets/images/Litters.jpeg";
+import slidersix from "../assets/images/coller.jpeg";
+import sliderseven from "../assets/images/toys.jpeg";
+import slidereight from "../assets/images/feeds.jpeg";
+import slidernine from "../assets/images/pharmacy.jpeg";
+import sliderten from "../assets/images/polutry.jpeg";
 
 import { supabase } from "../components/supabase/supabaseClient";
 
@@ -30,7 +38,7 @@ const Home = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     pauseOnHover: true,
     autoplay: true,
@@ -70,7 +78,7 @@ const Home = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     responsive: [
@@ -118,6 +126,19 @@ const Home = () => {
 
     fetchCategories();
   }, []);
+
+  const sliderImages = [
+    sliderone,
+    slidertwo,
+    sliderthree,
+    sliderfoor,
+    sliderfive,
+    slidersix,
+    sliderseven,
+    slidereight,
+    slidernine,
+    sliderten,
+  ];
 
   return (
     <div>
@@ -177,17 +198,25 @@ const Home = () => {
 
       {/* slider Categories */}
       <section>
-        <div className="container mb-8">
-          {mainCategories.length > 0 && (
-            <div className="mb-10">
-              <h3 className="text-2xl font-bold mb-4 text-center text-gray-700">
-                Explore Categories
-              </h3>
-              <Slider {...sliderSettings}>
-                <div></div>
-              </Slider>
-            </div>
-          )}
+        <div className="container mb-8 px-4">
+          <div className="mb-10">
+            <h3 className="text-2xl font-bold mb-4 text-center text-gray-700">
+              Explore Categories
+            </h3>
+            <Slider {...sliderSettings}>
+              {sliderImages.map((img, index) => (
+                <div key={index} className="px-2">
+                  <div className="">
+                    <img
+                      src={img}
+                      alt={`category-${index}`}
+                      className="w-full h-auto object-cover cursor-pointer"
+                    />
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
         </div>
       </section>
 
