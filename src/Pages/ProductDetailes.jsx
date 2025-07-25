@@ -78,13 +78,13 @@ const ProductDetails = () => {
           <span className="text-gray-900 font-medium">{product.name}</span>
         </nav>
 
-        <div className="grid lg:grid-cols-2 gap-10 mb-12">
+        <div className="grid lg:grid-cols-2  mb-12">
           <div>
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div className=" ">
               <img
                 src={product.image_url || product.images?.[0]}
                 alt={product.name}
-                className="w-full h-96 object-cover"
+                className=" rounded-2xl object-cover h-80"
               />
             </div>
           </div>
@@ -139,34 +139,6 @@ const ProductDetails = () => {
 
             <p className="text-gray-600">{product.description}</p>
 
-            <div className="flex items-center space-x-4">
-              <span className="text-sm font-medium">Quantity:</span>
-              <div className="flex items-center border border-gray-300 rounded-lg">
-                <button
-                  onClick={() => handleQuantityChange(-1)}
-                  className="px-3 py-1 hover:bg-gray-100"
-                >
-                  -
-                </button>
-                <span className="px-4 py-1 border-x border-gray-300">
-                  {quantity}
-                </span>
-                <button
-                  onClick={() => handleQuantityChange(1)}
-                  className="px-3 py-1 hover:bg-gray-100"
-                >
-                  +
-                </button>
-              </div>
-              <span
-                className={`text-sm ${
-                  product.inStock ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {product.inStock ? "In Stock" : "Out of Stock"}
-              </span>
-            </div>
-
             <div className="flex gap-4">
               <button
                 onClick={addToCart}
@@ -184,18 +156,6 @@ const ProductDetails = () => {
               >
                 <CreditCard size={20} /> Buy Now
               </button>
-            </div>
-
-            <div className="grid grid-cols-3 gap-4 text-sm text-gray-600 mt-4">
-              <div className="flex items-center gap-2">
-                <Truck size={16} /> Free Shipping
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield size={16} /> 2 Year Warranty
-              </div>
-              <div className="flex items-center gap-2">
-                <RotateCcw size={16} /> 30-Day Returns
-              </div>
             </div>
           </div>
         </div>

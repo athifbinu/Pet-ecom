@@ -207,11 +207,13 @@ const Home = () => {
               {sliderImages.map((img, index) => (
                 <div key={index} className="px-2">
                   <div className="">
-                    <img
-                      src={img}
-                      alt={`category-${index}`}
-                      className="w-full h-auto object-cover cursor-pointer"
-                    />
+                    <Link to="/shop">
+                      <img
+                        src={img}
+                        alt={`category-${index}`}
+                        className="w-full h-auto object-cover cursor-pointer"
+                      />
+                    </Link>
                   </div>
                 </div>
               ))}
