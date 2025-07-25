@@ -161,8 +161,8 @@ const ProductDetails = () => {
         </div>
 
         {/* Tab Section */}
-        <div className="bg-white rounded-xl shadow">
-          <nav className="flex border-b">
+        <div className="bg-white rounded-xl shadow-md">
+          <nav className="flex flex-wrap border-b">
             {[
               { key: "description", label: "Description", icon: Package },
               { key: "reviews", label: "Reviews", icon: Star },
@@ -171,10 +171,10 @@ const ProductDetails = () => {
               <button
                 key={key}
                 onClick={() => setActiveSection(key)}
-                className={`flex items-center gap-2 px-6 py-4 text-sm font-medium ${
+                className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition duration-200 ${
                   activeSection === key
                     ? "border-b-2 border-blue-500 text-blue-600"
-                    : "text-gray-600"
+                    : "text-gray-600 hover:text-blue-500"
                 }`}
               >
                 <Icon size={18} />
@@ -183,9 +183,9 @@ const ProductDetails = () => {
             ))}
           </nav>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {activeSection === "description" && (
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
                 {product.description}
               </p>
             )}
@@ -195,20 +195,20 @@ const ProductDetails = () => {
                 <h3 className="text-lg font-semibold mb-4">Write a Review</h3>
                 <div className="mb-4">{renderStars(userRating, true, 24)}</div>
                 <textarea
-                  className="w-full border border-gray-300 rounded p-3 mb-4"
+                  className="w-full border border-gray-300 rounded p-3 mb-4 text-sm"
                   rows="4"
                   placeholder="Share your experience..."
                   value={reviewText}
                   onChange={(e) => setReviewText(e.target.value)}
                 />
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm">
                   Submit Review
                 </button>
               </div>
             )}
 
             {activeSection === "specifications" && (
-              <div className="grid md:grid-cols-2 gap-6 text-gray-700">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-gray-700 text-sm sm:text-base">
                 <div>
                   <h4 className="font-semibold mb-3">General</h4>
                   <ul className="space-y-1">
@@ -247,7 +247,7 @@ const ProductDetails = () => {
             )}
           </div>
 
-          {/* sugested product slider */}
+          {/* Suggested Product Slider Section */}
         </div>
       </div>
     </div>
