@@ -8,7 +8,7 @@ import instagram from "../../assets/icons/instagram (1).png";
 import Twitter from "../../assets/icons/twitter.png";
 import Telegram from "../../assets/icons/telegram.png";
 import { FaCartArrowDown } from "react-icons/fa6";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaUser, FaUserLock } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const Footer = () => {
@@ -157,10 +157,10 @@ const Footer = () => {
               <FaHeart className="text-2xl text-gray-700" />
             </Link>
             <div className="text-center">
-              <FaCartArrowDown className="text-2xl text-gray-700" />
+              <FaUser className="text-2xl text-gray-700" />
             </div>
             <div className="text-center">
-              <FaCartArrowDown className="text-2xl text-gray-700" />
+              <FaUserLock className="text-2xl text-gray-700" />
             </div>
           </div>
         </div>
