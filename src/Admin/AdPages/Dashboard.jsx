@@ -1,9 +1,9 @@
 import React from "react";
-import {FiUsers} from "react-icons/fi"
-import {BiSolidCategoryAlt} from "react-icons/bi"
-import ProductIcon from "../../assets/adminicons/product.png"
-import OrderIcon from "../../assets/adminicons/order (1).png"
-import Carresicon from "../../assets/adminicons/carreer.png"
+import { FiUsers } from "react-icons/fi";
+import { BiSolidCategoryAlt } from "react-icons/bi";
+import ProductIcon from "../../assets/adminicons/product.png";
+import OrderIcon from "../../assets/adminicons/order (1).png";
+import Carresicon from "../../assets/adminicons/carreer.png";
 import {
   BarChart,
   Bar,
@@ -18,7 +18,15 @@ import {
   Line,
 } from "recharts";
 import "./test.css";
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAdminLoggedIn");
+    navigate("/admin/login");
+  };
+
   const data = [
     {
       name: "Page A",
@@ -70,7 +78,7 @@ const Dashboard = () => {
         <div className="flex flex-col rounded-lg bg-blue-500 animate-bounce cursor-pointer h-20 w-40 justify-center p-3  shadow-inherit">
           <div className="flex justify-between items-center ">
             <h3>PRODUCTS</h3>
-            <img src={ProductIcon} className="w-5"alt="" />
+            <img src={ProductIcon} className="w-5" alt="" />
           </div>
           <h1>300</h1>
         </div>
@@ -78,7 +86,7 @@ const Dashboard = () => {
         <div className="flex flex-col rounded-lg bg-orange-500 animate-bounce cursor-pointer h-20 w-40 justify-center p-3 shadow-inherit">
           <div className="flex justify-between items-center ">
             <h3>ORDERS</h3>
-              <img src={OrderIcon} className="w-5" alt="" />
+            <img src={OrderIcon} className="w-5" alt="" />
           </div>
           <h1>300</h1>
         </div>
@@ -86,7 +94,7 @@ const Dashboard = () => {
         <div className="flex flex-col rounded-lg bg-green-400 animate-bounce cursor-pointer h-20 w-40 justify-center p-3 shadow-inherit ">
           <div className="flex justify-between items-center ">
             <h3>CUSTOMERS</h3>
-            <FiUsers className="text-black"/>
+            <FiUsers className="text-black" />
           </div>
           <h1>300</h1>
         </div>
@@ -94,7 +102,7 @@ const Dashboard = () => {
         <div className="flex flex-col rounded-lg bg-indigo-500 animate-bounce cursor-pointer h-20 w-40 justify-center p-3 shadow-inherit ">
           <div className="flex justify-between items-center ">
             <h3>CATEGORIES</h3>
-             <BiSolidCategoryAlt className="text-black"/>
+            <BiSolidCategoryAlt className="text-black" />
           </div>
           <h1>300</h1>
         </div>

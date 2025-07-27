@@ -4,17 +4,16 @@ import {
   Star,
   ShoppingCart,
   CreditCard,
-  Truck,
-  Shield,
-  RotateCcw,
+  ChevronRight,
   Heart,
   Share2,
-  ChevronRight,
   Package,
   Clock,
 } from "lucide-react";
-import { cartActions } from "../Redux/Slices/CartSlice";
+
 import { useDispatch } from "react-redux";
+import { cartActions } from "../Redux/Slices/CartSlice";
+import Swal from "sweetalert2";
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -31,6 +30,26 @@ const ProductDetails = () => {
 
   const addToCart = () => {
     dispatch(cartActions.addItem({ ...product, quantity }));
+
+    Swal.fire({
+      title: "🎉 Added to Cart!",
+      text: `${product.name} has been added successfully.`,
+      icon: "success",
+      confirmButtonText: "OK",
+      background: "#f9fafb",
+      confirmButtonColor: "#2563eb",
+      customClass: {
+        popup: "rounded-xl shadow-lg",
+      },
+      timer: 2000,
+      timerProgressBar: true,
+      showClass: {
+        popup: "animate__animated animate__fadeInDown",
+      },
+      hideClass: {
+        popup: "animate__animated animate__fadeOutUp",
+      },
+    });
   };
 
   if (!product) {
@@ -70,6 +89,7 @@ const ProductDetails = () => {
   return (
     <div className="min-h-screen bg-gray-50 mt-24">
       <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Breadcrumb */}
         <nav className="flex items-center text-sm text-gray-600 space-x-2 mb-6">
           <span>Home</span>
           <ChevronRight size={16} />
@@ -78,17 +98,18 @@ const ProductDetails = () => {
           <span className="text-gray-900 font-medium">{product.name}</span>
         </nav>
 
-        <div className="grid lg:grid-cols-2  mb-12">
+        {/* Main Section */}
+        <div className="grid lg:grid-cols-2 mb-12 gap-8">
+          {/* Image */}
           <div>
-            <div className=" ">
-              <img
-                src={product.image_url || product.images?.[0]}
-                alt={product.name}
-                className=" rounded-2xl object-cover h-80"
-              />
-            </div>
+            <img
+              src={product.image_url || product.images?.[0]}
+              alt={product.name}
+              className="rounded-2xl object-cover h-80 w-full"
+            />
           </div>
 
+          {/* Details */}
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <span className="text-sm text-blue-600 font-medium">
@@ -139,6 +160,24 @@ const ProductDetails = () => {
 
             <p className="text-gray-600">{product.description}</p>
 
+            {/* Quantity Selector */}
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={() => handleQuantityChange(-1)}
+                className="bg-gray-200 px-3 py-1 rounded text-lg"
+              >
+                -
+              </button>
+              <span className="text-lg font-medium">{quantity}</span>
+              <button
+                onClick={() => handleQuantityChange(1)}
+                className="bg-gray-200 px-3 py-1 rounded text-lg"
+              >
+                +
+              </button>
+            </div>
+
+            {/* Buttons */}
             <div className="flex gap-4">
               <button
                 onClick={addToCart}
@@ -246,8 +285,6 @@ const ProductDetails = () => {
               </div>
             )}
           </div>
-
-          {/* Suggested Product Slider Section */}
         </div>
       </div>
     </div>

@@ -150,17 +150,17 @@ const Footer = () => {
           <div className="flex justify-between items-center">
             <Link to="/cart" className="text-center cursor-pointer">
               <p>{totalQuantity}</p>
-              <FaCartArrowDown className="text-2xl text-gray-700" />
+              <FaCartArrowDown className="text-3xl  text-gray-900" />
             </Link>
             <Link to="/watchList" className="text-center">
               {totellikeQuantity}
-              <FaHeart className="text-2xl text-gray-700" />
+              <FaHeart className="text-3xl text-gray-900" />
             </Link>
-            <div className="text-center">
-              <FaUser className="text-2xl text-gray-700" />
+            <div className="text-center mt-3">
+              <FaUser className="text-3xl text-gray-900" />
             </div>
-            <div className="text-center">
-              <FaUserLock className="text-2xl text-gray-700" />
+            <div className="text-center mt-3">
+              <FaUserLock className="text-3xl text-gray-900" />
             </div>
           </div>
         </div>
