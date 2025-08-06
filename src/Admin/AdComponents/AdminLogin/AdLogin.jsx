@@ -8,7 +8,6 @@ const AdLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // Example admin credentials
   const adminUser = {
     name: "admin",
     password: "admin123",
@@ -16,7 +15,6 @@ const AdLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (name === adminUser.name && password === adminUser.password) {
       localStorage.setItem("isAdminLoggedIn", "true");
       navigate("/admin");
@@ -30,34 +28,26 @@ const AdLogin = () => {
       <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl items-center">
         <div className="md:w-1/2 px-8 md:px-16">
           <h2 className="font-bold text-2xl text-[#002D74]">Admin Login</h2>
-          <p className="text-xs mt-4 text-[#002D74]">
-            If you are an admin, please log in.
-          </p>
+          <p className="text-xs mt-4 text-[#002D74]">Please log in as admin</p>
 
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <input
               className="p-2 mt-8 rounded-xl border"
               type="text"
-              name="name"
-              placeholder="Enter admin name"
+              placeholder="Admin name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
-            <div className="relative">
-              <input
-                className="p-2 rounded-xl border w-full"
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-
-            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-
+            <input
+              className="p-2 rounded-xl border w-full"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {error && <p className="text-red-500 text-sm">{error}</p>}
             <button
               type="submit"
               className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300"
@@ -66,9 +56,8 @@ const AdLogin = () => {
             </button>
           </form>
         </div>
-
         <div className="md:block hidden w-1/2">
-          <img className="rounded-2xl" src={logo} alt="Login" />
+          <img className="rounded-2xl" src={logo} alt="Login Visual" />
         </div>
       </div>
     </section>

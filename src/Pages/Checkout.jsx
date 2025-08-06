@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { supabase } from "../components/supabase/supabaseClient";
 
-// Payment Icons
 import gp from "../assets/icons/google-pay.png";
 import pt from "../assets/icons/Paytm-Logo.wine.svg";
 import pn from "../assets/icons/PhonePe-Logo.wine.svg";

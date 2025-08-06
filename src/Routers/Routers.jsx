@@ -17,9 +17,12 @@ import AddProduct from "../Admin/AdPages/AddProduct";
 import AddCarrers from "../Admin/AdPages/AddCarrers";
 import ListProducts from "../Admin/AdPages/ListProducts";
 import ListOrders from "../Admin/AdPages/ListOrders";
+
 import Login from "../components/Login/Login";
 import Signup from "../components/Signup/Signup";
 import AdminLogin from "../Admin/AdComponents/AdminLogin/AdLogin";
+
+import PrivateAdminRoute from "../Admin/AdComponents/AdminLogin/PrivateAdminRoute";
 
 const Routers = () => {
   return (
@@ -35,17 +38,53 @@ const Routers = () => {
       <Route path="help" element={<Help />} />
       <Route path="careers" element={<Carrers />} />
       <Route path="blog" element={<Blog />} />
-
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
 
-      <Route path="/admin" element={<Dashboard />} />
-      <Route path="/admin/addProduct" element={<AddProduct />} />
-      <Route path="/admin/addCarrers" element={<AddCarrers />} />
-      <Route path="/admin/products" element={<ListProducts />} />
-      <Route path="/admin/orders" element={<ListOrders />} />
-      <Route path="/admin/users" element={<Dashboard />} />
+      {/* Admin login route (public) */}
       <Route path="/admin/login" element={<AdminLogin />} />
+
+      {/* Protected admin routes */}
+      <Route
+        path="/admin"
+        element={
+          <PrivateAdminRoute>
+            <Dashboard />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/addProduct"
+        element={
+          <PrivateAdminRoute>
+            <AddProduct />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/addCarrers"
+        element={
+          <PrivateAdminRoute>
+            <AddCarrers />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/products"
+        element={
+          <PrivateAdminRoute>
+            <ListProducts />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/orders"
+        element={
+          <PrivateAdminRoute>
+            <ListOrders />
+          </PrivateAdminRoute>
+        }
+      />
     </Routes>
   );
 };

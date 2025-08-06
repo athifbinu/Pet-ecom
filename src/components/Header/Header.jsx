@@ -64,7 +64,7 @@ const Header = () => {
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
-                <Link to="#" className="text-gray-70 hover:text-orange-400">
+                <Link to="home" className="text-gray-70 hover:text-orange-400">
                   Home
                 </Link>
               </li>
@@ -81,7 +81,7 @@ const Header = () => {
             </ul>
           </div>
 
-          <div className="flex gap-3 items-center hidden sm:flex">
+          <div className="flex gap-3 items-center sm:flex">
             <Link to="watchList">
               <span className="cursor-pointer relative">
                 <FiHeart className="text-red-500" size={22} />
@@ -142,7 +142,7 @@ const Header = () => {
                     </Link>
                     <hr />
 
-                    <Link to="admin">
+                    <Link to="/admin/login">
                       <li className="flex items-center justify-between">
                         Admin <LiaBusinessTimeSolid className="ml-1" />
                       </li>

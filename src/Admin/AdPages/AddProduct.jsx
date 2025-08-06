@@ -3,11 +3,24 @@ import { ImSpinner } from "react-icons/im";
 import { supabase } from "../../components/supabase/supabaseClient.js"; // adjust path if needed
 
 const categoryOptions = {
-  "Shop pets": ["Dog", "Cat", "Fish", "Birds", "Rabbit", "Others"],
+  Foods: [
+    "Dog Food Treats",
+    "Cat Food",
+    "Fish Food",
+    "Rabbit Food",
+    "Bird Food",
+    "Turtle Food",
+  ],
   Pharmacy: ["Dog Medicine", "Cat Medicine", "Supplements", "Vitamins"],
   Toys: ["Chew Toys", "Interactive Toys", "Balls"],
   Grooming: ["Shampoos", "Combs", "Nail Clippers"],
-  Cages: ["Bird Cages", "Dog Crates", "Cat Carriers"],
+  CagesAndBags: [
+    "Dog Cages",
+    "Cat Cages",
+    "Bird Cages",
+    "Cat Bags",
+    "Cat Carriers",
+  ],
 };
 
 const AddProduct = () => {
