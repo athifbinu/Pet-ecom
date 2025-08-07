@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { ImSpinner } from "react-icons/im";
-import { supabase } from "../../components/supabase/supabaseClient.js"; // adjust path if needed
+import { supabase } from "../../components/supabase/supabaseClient.js";
 
 const categoryOptions = {
   Foods: [
@@ -20,6 +20,16 @@ const categoryOptions = {
     "Bird Cages",
     "Cat Bags",
     "Cat Carriers",
+  ],
+  CollerAndLeash: [
+    "Dog Collars",
+    "Cat Collars",
+    "Leashes",
+    "Dog Leashes",
+    "Cat Leashes",
+    "Full BodyBelt",
+    "Chain",
+    "Choke Chain",
   ],
 };
 
