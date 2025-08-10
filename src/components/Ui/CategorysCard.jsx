@@ -65,7 +65,7 @@ const CategorysCard = ({ filterCategory, filterSubCategory }) => {
             <img
               src={product.image_url}
               alt={product.name}
-              className="  object-cover"
+              className="  object-cover h-60 w-60 items-center m-auto"
             />
           </Link>
 

@@ -12,6 +12,14 @@ const categoryOptions = {
     "Turtle Food",
   ],
   Pharmacy: ["Dog Medicine", "Cat Medicine", "Supplements", "Vitamins"],
+  Polutry: [
+    "Feed supplements",
+    "Vitamins",
+    "Antibiotics",
+    "Antifungal",
+    "Antiviral",
+    "Weight booster",
+  ],
   Toys: ["Chew Toys", "Interactive Toys", "Balls"],
   Grooming: ["Shampoos", "Combs", "Nail Clippers"],
   CagesAndBags: [
@@ -30,6 +38,34 @@ const categoryOptions = {
     "Full BodyBelt",
     "Chain",
     "Choke Chain",
+  ],
+  Feeders: [
+    "Dog Steel Feeding bowl",
+    "Cat steel feeding bowl",
+    "Dog plastic feeding bowl",
+    "Cat plastic feeding bowl",
+    "Bird Feeding bowl,",
+    "Rabbit Feeding bowl",
+    "Poultry Drinker",
+    "Poultry Feeder",
+  ],
+  Grooming: [
+    "Shampoos",
+    "Powders",
+    "Sprays",
+    "Oils",
+    "Cleansers",
+    "Combs",
+    "Nail cutters",
+    "Tick Combs",
+    "Massager",
+    "Soaps",
+  ],
+  CatLitters: [
+    "Cat litter 10 kg",
+    "Cat litter 5 kg",
+    "Cat litter 10 kg",
+    "Others",
   ],
 };
 
@@ -78,7 +114,6 @@ const AddProduct = () => {
 
       alert("Product added successfully!");
 
-      // Reset form
       setProductName("");
       setPrice("");
       setCategory("");

@@ -105,7 +105,7 @@ const ProductDetails = () => {
             <img
               src={product.image_url || product.images?.[0]}
               alt={product.name}
-              className="rounded-2xl object-cover h-80 w-full"
+              className="rounded-2xl object-cover "
             />
           </div>
 
