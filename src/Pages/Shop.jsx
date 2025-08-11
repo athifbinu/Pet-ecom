@@ -49,7 +49,7 @@ const Shop = () => {
       <div
         className="px-[30px] py-4 max-w-[1170px] mx-auto flex flex-col lg:flex-row
         justify-between gap-4 lg:gap-x-3 relative lg:top-4 lg:shadow-1 bg-white 
-        lg:bg-transparent lg:backdrop-blur rounded-lg -mt-36 mb-24"
+        lg:bg-transparent lg:backdrop-blur rounded-lg -mt-36 mb-24 "
       >
         <input
           type="text"
