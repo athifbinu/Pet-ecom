@@ -81,7 +81,8 @@ const Header = () => {
             </ul>
           </div>
 
-          <div className="flex gap-3 items-center sm:flex">
+          {/* div start - hidden on mobile, visible from lg and up */}
+          <div className="hidden lg:flex gap-3 items-center">
             <Link to="watchList">
               <span className="cursor-pointer relative">
                 <FiHeart className="text-red-500" size={22} />
