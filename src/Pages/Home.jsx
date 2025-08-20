@@ -222,18 +222,18 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Shop by Pet */}
+      {/* Shop by foods */}
       <section>
         <div className="container mb-8">
           <div className="flex gap-4 items-center justify-center">
             <img className="w-11" src={star} alt="Star Icon" />
-            <span className="text-3xl font-bold">Shop by Pets/animals</span>
+            <span className="text-3xl font-bold">Foods</span>
             <img className="w-11" src={star} alt="Star Icon" />
           </div>
           <br />
           <br />
           <div className=" ">
-            <CategorysCard filterCategory="Shop pets" />
+            <CategorysCard filterCategory="Foods" />
           </div>
         </div>
       </section>
@@ -247,12 +247,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Shop by Poultry */}
       <section>
         <div className="container mb-8">
           <div className="flex gap-4 items-center justify-center">
             <img className="w-11" src={star} alt="Star Icon" />
-            <span className="text-3xl font-bold">Shop by Toys</span>
+            <span className="text-3xl font-bold">Toys</span>
             <img className="w-11" src={star} alt="Star Icon" />
           </div>
           <br />
@@ -267,13 +266,13 @@ const Home = () => {
         <div className="container mb-8">
           <div className="flex gap-4 items-center justify-center">
             <img className="w-11" src={star} alt="Star Icon" />
-            <span className="text-3xl font-bold">Shop by Cages</span>
+            <span className="text-3xl font-bold">Coller and leash</span>
             <img className="w-11" src={star} alt="Star Icon" />
           </div>
           <br />
           <br />
           <div className="">
-            <CategorysCard filterCategory="Cages" />
+            <CategorysCard filterCategory="CollerAndLeash" />
           </div>
         </div>
       </section>
@@ -281,7 +280,39 @@ const Home = () => {
         <div className="container mb-8">
           <div className="flex gap-4 items-center justify-center">
             <img className="w-11" src={star} alt="Star Icon" />
-            <span className="text-3xl font-bold">Shop by Pharmacy</span>
+            <span className="text-3xl font-bold">Grooming</span>
+            <img className="w-11" src={star} alt="Star Icon" />
+          </div>
+          <br />
+          <br />
+          <div className="">
+            <CategorysCard filterCategory="Grooming" />
+          </div>
+        </div>
+      </section>
+      <section>
+        <div className="container mb-8">
+          <div className="flex gap-4 items-center justify-center">
+            <img className="w-11" src={star} alt="Star Icon" />
+            <span className="text-3xl font-bold">Cages and Bags</span>
+            <img className="w-11" src={star} alt="Star Icon" />
+          </div>
+          <br />
+          <br />
+          <div className="">
+            <CategorysCard
+              filterCategory="
+            CagesAndBags"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container mb-8">
+          <div className="flex gap-4 items-center justify-center">
+            <img className="w-11" src={star} alt="Star Icon" />
+            <span className="text-3xl font-bold">Pharmacy</span>
             <img className="w-11" src={star} alt="Star Icon" />
           </div>
           <br />
@@ -291,17 +322,18 @@ const Home = () => {
           </div>
         </div>
       </section>
+
       <section>
         <div className="container mb-8">
           <div className="flex gap-4 items-center justify-center">
             <img className="w-11" src={star} alt="Star Icon" />
-            <span className="text-3xl font-bold">Shop Grooming</span>
+            <span className="text-3xl font-bold">Poultry</span>
             <img className="w-11" src={star} alt="Star Icon" />
           </div>
           <br />
           <br />
           <div className="">
-            <CategorysCard filterCategory="Grooming" />
+            <CategorysCard filterCategory="Polutry" />
           </div>
         </div>
       </section>

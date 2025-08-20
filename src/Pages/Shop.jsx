@@ -65,11 +65,15 @@ const Shop = () => {
           onChange={(e) => setCategoryFilter(e.target.value)}
         >
           <option value="">All Categories</option>
-          <option value="Shop pets">Shop Pets</option>
-          <option value="Pharmacy">Pharmacy</option>
+          <option value="Foods">Foods</option>
           <option value="Toys">Toys</option>
+          <option value="CollerAndLeash">Coller and leash</option>
           <option value="Grooming">Grooming</option>
-          <option value="Cages">Cages</option>
+          <option value="CagesAndBags">Cages and bags</option>
+          <option value="Feeders">Feeders</option>
+          <option value="CatLitters">Cat litters</option>
+          <option value="Pharmacy">Pharmacy</option>
+          <option value="Polutry">Poultry</option>
         </select>
       </div>
 
