@@ -23,6 +23,7 @@ import Signup from "../components/Signup/Signup";
 import AdminLogin from "../Admin/AdComponents/AdminLogin/AdLogin";
 
 import PrivateAdminRoute from "../Admin/AdComponents/AdminLogin/PrivateAdminRoute";
+import ThankYou from "../Pages/ThankYou";
 
 const Routers = () => {
   return (
@@ -40,6 +41,7 @@ const Routers = () => {
       <Route path="blog" element={<Blog />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
+      <Route path="/thank-you" element={<ThankYou />} />
 
       {/* Admin login route (public) */}
       <Route path="/admin/login" element={<AdminLogin />} />

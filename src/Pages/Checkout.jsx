@@ -13,9 +13,7 @@ import mc from "../assets/icons/Mastercard-Logo.wine.svg";
 import vs from "../assets/icons/Visa_Inc.-Logo.wine.svg";
 
 const Checkout = () => {
-  const { cartItems, totalAmount, totalQuantity } = useSelector(
-    (state) => state.cart
-  );
+  const { cartItems, totalAmount } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -46,10 +44,9 @@ const Checkout = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setIsLoading(true);
 
-    const adminPhone = "7594013460";
+    const adminPhone = "8089371919";
 
     const productList = cartItems.map((item) => ({
       name: item.productName,
@@ -76,8 +73,7 @@ ${productList
   .join("\n")}
 
 🧾 Subtotal: ₹${totalAmount}
-🚚 Shipping: ₹10
-💰 Total: ₹${totalAmount + 10}`;
+💰 Total: ₹${totalAmount}`;
 
     try {
       const { error } = await supabase.from("orders").insert([
@@ -93,8 +89,7 @@ ${productList
           pincode: formData.pincode,
           items: productList,
           subtotal: totalAmount,
-          shipping: 10,
-          total: totalAmount + 10,
+          total: totalAmount,
         },
       ]);
 
@@ -104,13 +99,18 @@ ${productList
         return;
       }
 
+      // Open WhatsApp Message for Admin
       window.open(
         `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`,
         "_blank"
       );
 
-      alert("Order placed successfully!");
-      navigate("/thank-you");
+      alert("✅ Order placed successfully!");
+
+      // Navigate with order details
+      navigate("/thank-you", {
+        state: { formData, productList, totalAmount },
+      });
     } catch (err) {
       console.error("Unexpected error:", err);
       alert("Something went wrong.");
@@ -126,6 +126,7 @@ ${productList
         <div className="grid md:grid-cols-2 gap-10">
           {/* Left Form */}
           <form onSubmit={handleSubmit}>
+            {/* Input Fields */}
             <div className="flex gap-3 mb-5">
               <input
                 type="text"
@@ -272,14 +273,10 @@ ${productList
                 <p className="font-medium">Subtotal</p>
                 <p>₹{totalAmount}</p>
               </div>
-              <div className="flex justify-between mb-2">
-                <p className="font-medium">Shipping</p>
-                <p>₹10</p>
-              </div>
               <hr className="my-3" />
               <div className="flex justify-between text-lg font-bold">
                 <p>Total</p>
-                <p>₹{totalAmount + 10}</p>
+                <p>₹{totalAmount}</p>
               </div>
             </div>
           </div>

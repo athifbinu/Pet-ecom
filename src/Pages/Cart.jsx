@@ -113,7 +113,7 @@ const Cart = () => {
           <div className="border-t mt-6 pt-4">
             <div className="flex justify-between text-sm font-semibold mb-4">
               <span>Total cost</span>
-              <span>₹{totalAmount + 10}</span>
+              <span>₹{totalAmount}</span>
             </div>
             <Link to="/checkout">
               <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-md">
