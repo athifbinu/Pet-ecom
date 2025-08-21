@@ -3,7 +3,7 @@ import React from "react";
 const CommonSection = () => {
   return (
     <section
-      className="bg-[url('/src/assets/images/background.jpg')] bg-cover bg-center m-3 sm:m-5 rounded-xl py-11 sm:py-44 md:py-28
+      className="bg-[url('/src/assets/images/background.jpg')] bg-cover bg-center m-3 sm:m-5 rounded-xl py-36 sm:py-44 md:py-28
     "
     >
       <div className="container mx-auto text-center px-4">
