@@ -46,7 +46,7 @@ const Checkout = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const adminPhone = "8089371919";
+    const adminPhone = "918089371919";
 
     const productList = cartItems.map((item) => ({
       name: item.productName,
