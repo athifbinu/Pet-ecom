@@ -143,19 +143,35 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-rose-100 to-teal-100 py-36">
-        <div className="container mx-auto grid md:grid-cols-2 sm:grid-cols-1 items-center">
-          <div className="sm:m-auto">
-            <h2 className="lg:text-3xl md:text-2xl font-bold mb-5">
-              Mtm Veterinary Medicines <br />& PetShop
-            </h2>
-            <p className="text-lg mb-6">The Heaven Of Your Pets</p>
-            <button className="bg-primary text-white hover:bg-primary hover:text-white focus:outline-none rounded-md px-4 py-2">
+      <section className="relative bg-gradient-to-r from-rose-100 via-pink-50 to-teal-100 py-40 overflow-hidden ">
+        <div className="container mx-auto grid md:grid-cols-2 gap-10 items-center px-6">
+          {/* Left Content */}
+          <div className="space-y-6 text-center md:text-left">
+            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-gray-800">
+              Mtm Veterinary Medicines <br />
+              <span className="text-primary">& PetShop</span>
+            </h1>
+            <p className="text-lg text-gray-600">
+              Your Pet’s Happiness, Our Priority 🐾
+            </p>
+            <button className="bg-primary text-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:bg-primary/90 transition-all">
               <Link to="/shop">Shop Now</Link>
             </button>
           </div>
-          <div>
-            <img className="hidden sm:block" src={heroImage} alt="Hero" />
+
+          {/* Right Content - Hero Image */}
+          <div className="relative flex justify-center items-center">
+            <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl p-6">
+              <img
+                className="w-full max-w-sm drop-shadow-lg animate-bounce-slow"
+                src={heroImage}
+                alt="Hero"
+              />
+            </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -top-6 -right-6 w-20 h-20 bg-primary/20 rounded-full blur-2xl"></div>
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-teal-200/20 rounded-full blur-3xl"></div>
           </div>
         </div>
       </section>

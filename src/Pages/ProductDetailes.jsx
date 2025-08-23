@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Star,
@@ -10,10 +10,14 @@ import {
   Package,
   Clock,
 } from "lucide-react";
-
 import { useDispatch } from "react-redux";
 import { cartActions } from "../Redux/Slices/CartSlice";
 import Swal from "sweetalert2";
+import { supabase } from "../components/supabase/supabaseClient"; // adjust path if needed
+import ProductCard from "../components/Ui/ProductCard"; // adjust path if needed
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -25,6 +29,7 @@ const ProductDetails = () => {
   const [reviewText, setReviewText] = useState("");
   const [userRating, setUserRating] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [suggested, setSuggested] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -84,6 +89,48 @@ const ProductDetails = () => {
         />
       </button>
     ));
+  };
+
+  // ✅ Fetch Suggested Products
+  useEffect(() => {
+    if (product?.category) {
+      const fetchSuggested = async () => {
+        const { data, error } = await supabase
+          .from("products")
+          .select("*")
+          .eq("category", product.category)
+          .neq("id", product.id) // exclude current product
+          .limit(8);
+
+        if (error) {
+          console.error("Error fetching suggested:", error.message);
+        } else {
+          setSuggested(data);
+        }
+      };
+
+      fetchSuggested();
+    }
+  }, [product]);
+
+  // ✅ Slider settings
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 640,
+        settings: { slidesToShow: 1 },
+      },
+    ],
   };
 
   return (
@@ -285,6 +332,21 @@ const ProductDetails = () => {
               </div>
             )}
           </div>
+        </div>
+
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold mb-6">Suggested Products</h2>
+          {suggested.length > 0 ? (
+            <Slider {...sliderSettings}>
+              {suggested.map((item) => (
+                <div key={item.id} className="px-2">
+                  <ProductCard item={item} />
+                </div>
+              ))}
+            </Slider>
+          ) : (
+            <p className="text-gray-500">No suggested products available.</p>
+          )}
         </div>
       </div>
     </div>

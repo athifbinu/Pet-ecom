@@ -27,6 +27,9 @@ export const theme = {
     boxShadow: {
       1: "0px 4px 30px rgba(0, 0, 0, 0.08)",
     },
+    animation: {
+      "bounce-slow": "bounce 3s infinite",
+    },
   },
 };
 export const plugins = [];
