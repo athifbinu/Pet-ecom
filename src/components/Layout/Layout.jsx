@@ -5,16 +5,47 @@ import { useLocation } from "react-router-dom";
 import Routers from "../../Routers/Routers";
 import AdminNav from "../../Admin/AdComponents/AdminNav/AdminNav";
 import AdminFooter from "../../Admin/AdComponents/AdFooter/AdminFooter";
+import DoctorHeader from "../DoctorHader/DoctorHeader";
+
 const Layout = () => {
   const location = useLocation();
+  const isAdminLoggedIn = localStorage.getItem("isAdminLoggedIn") === "true";
+
+  // ✅ Admin route check
+  const isAdminRoute = location.pathname.startsWith("/admin");
+  const isAdminLoginPage = location.pathname === "/admin/login";
+
+  // ✅ Doctor route check
+  const isDoctorRoute =
+    location.pathname.startsWith("/Doctor") ||
+    location.pathname.startsWith("/Doctors");
 
   return (
     <>
-      {location.pathname.startsWith("/admin") ? <AdminNav /> : <Header />}
+      {/* Header/Nav */}
+      {isAdminRoute ? (
+        isAdminLoggedIn && !isAdminLoginPage ? (
+          <AdminNav />
+        ) : null
+      ) : isDoctorRoute ? (
+        <DoctorHeader />
+      ) : (
+        <Header />
+      )}
+
+      {/* Main content */}
       <div className="mb-20">
         <Routers />
       </div>
-      {location.pathname.startsWith("/admin") ? <AdminFooter /> : <Footer />}
+
+      {/* Footer */}
+      {isAdminRoute ? (
+        isAdminLoggedIn && !isAdminLoginPage ? (
+          <AdminFooter />
+        ) : null
+      ) : (
+        <Footer />
+      )}
     </>
   );
 };

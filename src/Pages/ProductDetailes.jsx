@@ -163,19 +163,18 @@ const ProductDetails = () => {
                 {product.brand || "Unknown Brand"}
               </span>
               <div className="flex space-x-2">
-                <button
-                  onClick={() => setIsWishlisted(!isWishlisted)}
-                  className="p-2 rounded-full hover:bg-gray-100"
-                >
-                  <Heart
-                    className={
-                      isWishlisted
-                        ? "text-red-500 fill-red-500"
-                        : "text-gray-400"
-                    }
-                    size={20}
-                  />
-                </button>
+                <Link to="">
+                  <button className="p-2 rounded-full hover:bg-gray-100">
+                    <Heart
+                      className={
+                        isWishlisted
+                          ? "text-red-500 fill-red-500"
+                          : "text-gray-400"
+                      }
+                      size={20}
+                    />
+                  </button>
+                </Link>
                 <button className="p-2 rounded-full hover:bg-gray-100">
                   <Share2 className="text-gray-400" size={20} />
                 </button>

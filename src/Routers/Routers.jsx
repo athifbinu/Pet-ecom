@@ -11,6 +11,10 @@ import Contact from "../Pages/Contact";
 import Help from "../Pages/Help";
 import Carrers from "../Pages/Carrers";
 import Blog from "../Pages/Blog";
+import ThankYou from "../Pages/ThankYou";
+import DoctorsHome from "../Pages/DoctorsHome";
+import DoctorListing from "../Pages/DoctorListing";
+import DoctorCheckout from "../Pages/DoctorCheckout";
 
 import Dashboard from "../Admin/AdPages/Dashboard";
 import AddProduct from "../Admin/AdPages/AddProduct";
@@ -23,7 +27,6 @@ import Signup from "../components/Signup/Signup";
 import AdminLogin from "../Admin/AdComponents/AdminLogin/AdLogin";
 
 import PrivateAdminRoute from "../Admin/AdComponents/AdminLogin/PrivateAdminRoute";
-import ThankYou from "../Pages/ThankYou";
 
 const Routers = () => {
   return (
@@ -41,6 +44,11 @@ const Routers = () => {
       <Route path="blog" element={<Blog />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
+
+      <Route path="Doctor" element={<DoctorsHome />} />
+      <Route path="DoctorsList" element={<DoctorListing />} />
+      <Route path="DoctorsCheckout" element={<DoctorCheckout />} />
+
       <Route path="/thank-you" element={<ThankYou />} />
 
       {/* Admin login route (public) */}

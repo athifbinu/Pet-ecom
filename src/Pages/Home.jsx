@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/images/mane.png";
 import aboutImage from "../assets/images/aboutus.png";
-import test from "../assets/categoys/7413369.png";
-import test1 from "../assets/categoys/7413375.png";
 import CategorysCard from "../components/Ui/CategorysCard";
 import star from "../assets/icons/star.png";
 import Banner from "../assets/images/banner.png";
@@ -359,11 +357,13 @@ const Home = () => {
         <div className="container mb-8">
           <div className="grid md:grid-cols-2 gap-5">
             <div>
-              <img
-                className="cursor-pointer"
-                src={frame1}
-                alt="Consultation 1"
-              />
+              <Link to="/Doctor">
+                <img
+                  className="cursor-pointer"
+                  src={frame1}
+                  alt="Consultation 1"
+                />
+              </Link>
             </div>
             <div>
               <img
