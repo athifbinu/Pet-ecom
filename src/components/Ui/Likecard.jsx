@@ -3,16 +3,31 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { likeActions } from "../../Redux/Slices/LikeSlice";
 import { cartActions } from "../../Redux/Slices/CartSlice";
+import Swal from "sweetalert2";
 
 const Likecard = ({ item }) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
     dispatch(likeActions.removeFromLike(item.id));
+    Swal.fire({
+      icon: "error",
+      title: "Removed!",
+      text: `${item.name} has been removed from likes.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   const addTocart = () => {
     dispatch(cartActions.addItem(item));
+    Swal.fire({
+      icon: "success",
+      title: "Added to Cart!",
+      text: `${item.name} has been added to your cart.`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (

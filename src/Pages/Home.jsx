@@ -304,20 +304,18 @@ const Home = () => {
           </div>
         </div>
       </section>
+
       <section>
         <div className="container mb-8">
           <div className="flex gap-4 items-center justify-center">
             <img className="w-11" src={star} alt="Star Icon" />
-            <span className="text-3xl font-bold">Cages and Bags</span>
+            <span className="text-3xl font-bold">Cages and bags</span>
             <img className="w-11" src={star} alt="Star Icon" />
           </div>
           <br />
           <br />
           <div className="">
-            <CategorysCard
-              filterCategory="
-            CagesAndBags"
-            />
+            <CategorysCard filterCategory="CagesAndBags" />
           </div>
         </div>
       </section>
