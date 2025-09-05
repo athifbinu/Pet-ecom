@@ -55,7 +55,7 @@ const CategorysCard = ({ filterCategory, filterSubCategory }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-8 px-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-8 px-4">
       {products.map((product) => (
         <div
           key={product.id}
