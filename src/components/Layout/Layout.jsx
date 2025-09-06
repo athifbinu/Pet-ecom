@@ -34,9 +34,10 @@ const Layout = () => {
       )}
 
       {/* Main content */}
-      <div className="mb-20">
+      <main className="">
+        {/* 👆 Added pt-20 so content starts below fixed header */}
         <Routers />
-      </div>
+      </main>
 
       {/* Footer */}
       {isAdminRoute ? (
