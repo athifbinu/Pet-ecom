@@ -66,7 +66,7 @@ const Cart = () => {
     <div className="container mx-auto mt-6 px-4">
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Left - Cart Items */}
-        <div className="w-full lg:w-3/4 bg-white p-6 rounded-md shadow-md">
+        <div className="w-full lg:w-3/4 bg-white p-12 rounded-md shadow-md mt-14">
           <div className="flex flex-col sm:flex-row justify-between border-b pb-4">
             <h1 className="text-xl font-semibold">Shopping Cart</h1>
             <h2 className="text-xl font-semibold">{totalQuantity} Items</h2>
@@ -101,7 +101,7 @@ const Cart = () => {
         </div>
 
         {/* Right - Order Summary */}
-        <div className="w-full lg:w-1/4 bg-white p-6 rounded-md shadow-md">
+        <div className="w-full lg:w-1/4 bg-white p-6 rounded-md shadow-md mt-14">
           <h1 className="text-xl font-semibold border-b pb-4">Order Summary</h1>
           <div className="flex justify-between mt-4">
             <span className="text-sm font-semibold uppercase">

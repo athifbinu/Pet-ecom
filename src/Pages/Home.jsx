@@ -217,6 +217,52 @@ const Home = () => {
         </div>
       </section>
 
+      <section>
+        <div className="container mb-8">
+          <div className="flex gap-4 items-center justify-center">
+            <img className="w-11" src={star} alt="Star Icon" />
+            <span className="text-3xl font-bold">Bags and Cages</span>
+            <img className="w-11" src={star} alt="Star Icon" />
+          </div>
+          <br />
+          <CategorysCard filterCategory="CagesAndBags" />
+        </div>
+      </section>
+
+      <section>
+        <div className="container mb-8">
+          <div className="flex gap-4 items-center justify-center">
+            <img className="w-11" src={star} alt="Star Icon" />
+            <span className="text-3xl font-bold">Pharmacy</span>
+            <img className="w-11" src={star} alt="Star Icon" />
+          </div>
+          <br />
+          <CategorysCard filterCategory="Pharmacy" />
+        </div>
+      </section>
+      <section>
+        <div className="container mb-8">
+          <div className="flex gap-4 items-center justify-center">
+            <img className="w-11" src={star} alt="Star Icon" />
+            <span className="text-3xl font-bold">Poultry</span>
+            <img className="w-11" src={star} alt="Star Icon" />
+          </div>
+          <br />
+          <CategorysCard filterCategory="Polutry" />
+        </div>
+      </section>
+      <section>
+        <div className="container mb-8">
+          <div className="flex gap-4 items-center justify-center">
+            <img className="w-11" src={star} alt="Star Icon" />
+            <span className="text-3xl font-bold">Grooming</span>
+            <img className="w-11" src={star} alt="Star Icon" />
+          </div>
+          <br />
+          <CategorysCard filterCategory="Grooming" />
+        </div>
+      </section>
+
       {/* Banner */}
       <section>
         <div className="container mb-8">
@@ -241,7 +287,29 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Add other category sections (CollerAndLeash, Grooming, etc.) same like above */}
+      <section>
+        <div className="container mb-8">
+          <div className="flex gap-4 items-center justify-center">
+            <img className="w-11" src={star} alt="Star Icon" />
+            <span className="text-3xl font-bold">Bags and Cages</span>
+            <img className="w-11" src={star} alt="Star Icon" />
+          </div>
+          <br />
+          <CategorysCard filterCategory="CagesAndBags" />
+        </div>
+      </section>
+
+      <section>
+        <div className="container mb-8">
+          <div className="flex gap-4 items-center justify-center">
+            <img className="w-11" src={star} alt="Star Icon" />
+            <span className="text-3xl font-bold">Feeders</span>
+            <img className="w-11" src={star} alt="Star Icon" />
+          </div>
+          <br />
+          <CategorysCard filterCategory="Feeders" />
+        </div>
+      </section>
 
       {/* Doctor Consulting */}
       <section>

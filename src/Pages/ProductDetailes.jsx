@@ -13,8 +13,8 @@ import {
 import { useDispatch } from "react-redux";
 import { cartActions } from "../Redux/Slices/CartSlice";
 import Swal from "sweetalert2";
-import { supabase } from "../components/supabase/supabaseClient"; // adjust path if needed
-import ProductCard from "../components/Ui/ProductCard"; // adjust path if needed
+import { supabase } from "../components/supabase/supabaseClient";
+import ProductCard from "../components/Ui/ProductCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -33,9 +33,18 @@ const ProductDetails = () => {
 
   const dispatch = useDispatch();
 
+  // ✅ Stop flicker: if no product, show loader instead of redirecting instantly
+  if (!product) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-gray-600">Loading...</p>
+      </div>
+    );
+  }
+
+  // ✅ Add to cart with SweetAlert
   const addToCart = () => {
     dispatch(cartActions.addItem({ ...product, quantity }));
-
     Swal.fire({
       title: "🎉 Added to Cart!",
       text: `${product.name} has been added successfully.`,
@@ -43,30 +52,18 @@ const ProductDetails = () => {
       confirmButtonText: "OK",
       background: "#f9fafb",
       confirmButtonColor: "#2563eb",
-      customClass: {
-        popup: "rounded-xl shadow-lg",
-      },
+      customClass: { popup: "rounded-xl shadow-lg" },
       timer: 2000,
       timerProgressBar: true,
-      showClass: {
-        popup: "animate__animated animate__fadeInDown",
-      },
-      hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
-      },
     });
   };
-
-  if (!product) {
-    navigate("/shop");
-    return null;
-  }
 
   const handleQuantityChange = (delta) => {
     const newQty = quantity + delta;
     if (newQty >= 1 && newQty <= 10) setQuantity(newQty);
   };
 
+  // ✅ Star rating renderer
   const renderStars = (rating, interactive = false, size = 20) => {
     return [...Array(5)].map((_, i) => (
       <button
@@ -99,43 +96,32 @@ const ProductDetails = () => {
           .from("products")
           .select("*")
           .eq("category", product.category)
-          .neq("id", product.id) // exclude current product
+          .neq("id", product.id)
           .limit(8);
 
-        if (error) {
-          console.error("Error fetching suggested:", error.message);
-        } else {
-          setSuggested(data);
-        }
+        if (!error && data) setSuggested(data);
       };
-
       fetchSuggested();
     }
   }, [product]);
 
-  // ✅ Slider settings
+  // ✅ Slider settings (mobile-friendly, no flicker)
   const sliderSettings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 2 },
-      },
-      {
-        breakpoint: 640,
-        settings: { slidesToShow: 1 },
-      },
+      { breakpoint: 1024, settings: { slidesToShow: 2 } },
+      { breakpoint: 640, settings: { slidesToShow: 1 } },
     ],
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 mt-24">
-      <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden pt-[4rem]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Breadcrumb */}
         <nav className="flex items-center text-sm text-gray-600 space-x-2 mb-6">
           <span>Home</span>
@@ -146,13 +132,13 @@ const ProductDetails = () => {
         </nav>
 
         {/* Main Section */}
-        <div className="grid lg:grid-cols-2 mb-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* Image */}
           <div>
             <img
               src={product.image_url || product.images?.[0]}
               alt={product.name}
-              className="rounded-2xl object-cover "
+              className="rounded-2xl object-cover w-full aspect-[4/5]" // ✅ fixed aspect ratio
             />
           </div>
 
@@ -333,6 +319,7 @@ const ProductDetails = () => {
           </div>
         </div>
 
+        {/* Suggested Products */}
         <div className="mt-12">
           <h2 className="text-2xl font-bold mb-6">Suggested Products</h2>
           {suggested.length > 0 ? (
