@@ -66,14 +66,16 @@ const Shop = () => {
         >
           <option value="">All Categories</option>
           <option value="Foods">Foods</option>
-          <option value="Toys">Toys</option>
-          <option value="CollerAndLeash">Coller and leash</option>
-          <option value="Grooming">Grooming</option>
-          <option value="CagesAndBags">Cages and bags</option>
-          <option value="Feeders">Feeders</option>
-          <option value="CatLitters">Cat litters</option>
           <option value="Pharmacy">Pharmacy</option>
           <option value="Polutry">Poultry</option>
+          <option value="Toys">Toys</option>
+          <option value="CagesAndBagsBeds">Cages and Bags & Beds</option>
+          <option value="CollerAndLeash">Coller and Leash</option>
+          <option value="Feeders">Feeders</option>
+          <option value="Grooming">Grooming</option>
+          <option value="CatLittersitems">Cat Litters</option>
+          <option value="AquaticCare">Aquatic Care</option>
+          <option value="BirdCare">Bird Care</option>
         </select>
       </div>
 

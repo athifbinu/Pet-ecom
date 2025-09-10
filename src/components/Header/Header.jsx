@@ -44,7 +44,7 @@ const Header = () => {
           </Link>
 
           {/* Nav links */}
-          <div className="hidden lg:flex space-x-8">
+          <div className="hidden lg:flex space-x-8 font-bold">
             <Link to="/home" className="hover:text-orange-400">
               Home
             </Link>

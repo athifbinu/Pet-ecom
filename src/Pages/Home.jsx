@@ -148,31 +148,44 @@ const Home = () => {
       </section>
 
       {/* About Us Section */}
+
       <section className="bg-white py-16 sm:py-28">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Left Image */}
             <div className="w-full">
               <img
-                className="rounded-lg shadow-md"
+                className="rounded-lg shadow-lg"
                 src={aboutImage}
-                alt="About Us"
+                alt="About MTM Veterinary Medicals & Petshop"
               />
             </div>
+
+            {/* Right Content */}
             <div className="w-full md:pl-8">
-              <h2 className="text-2xl md:text-3xl font-bold mb-5">About Us</h2>
-              <p className="text-base md:text-lg mb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                vel felis a nunc rutrum dignissim.
+              <h2 className="text-2xl md:text-3xl font-bold mb-5">
+                About <span className="text-orange-400">Us</span>
+              </h2>
+              <p className="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
+                Welcome to{" "}
+                <span className="font-semibold">
+                  MTM Veterinary Medicals & Petshop
+                </span>
+                , your trusted destination for all veterinary medicines, pet
+                foods, and accessories. We are passionate about keeping your
+                pets healthy and happy with top-quality products and expert
+                care.
               </p>
-              <p className="text-base md:text-lg mb-6">
-                Integer vehicula eu nisi vel convallis. Sed euismod lorem a
-                tortor varius, vel aliquam augue malesuada.
+              <p className="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
+                From essential veterinary supplies to nutritious foods and fun
+                accessories, we bring everything under one roof. With years of
+                experience, we are proud to serve our community and support pet
+                parents with love and dedication.
               </p>
-              <Link to="/about">
-                <button className="bg-primary text-white hover:bg-primary-dark rounded-md px-6 py-3">
-                  Learn More
-                </button>
-              </Link>
+
+              <button className="bg-orange-600 text-white hover:bg-orange-500 transition rounded-md px-6 py-3 font-medium shadow-md">
+                Learn More
+              </button>
             </div>
           </div>
         </div>
@@ -337,6 +350,18 @@ const Home = () => {
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container mb-8">
+          <div className="flex gap-4 items-center justify-center">
+            <img className="w-11" src={star} alt="Star Icon" />
+            <span className="text-3xl font-bold">Aquatic Items</span>
+            <img className="w-11" src={star} alt="Star Icon" />
+          </div>
+          <br />
+          <CategorysCard filterCategory="AquaticCare" />
         </div>
       </section>
 
