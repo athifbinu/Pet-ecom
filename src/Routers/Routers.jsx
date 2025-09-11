@@ -27,6 +27,7 @@ import Signup from "../components/Signup/Signup";
 import AdminLogin from "../Admin/AdComponents/AdminLogin/AdLogin";
 
 import PrivateAdminRoute from "../Admin/AdComponents/AdminLogin/PrivateAdminRoute";
+import DoctorAdding from "../Admin/AdPages/DoctorAdding";
 
 const Routers = () => {
   return (
@@ -92,6 +93,22 @@ const Routers = () => {
         element={
           <PrivateAdminRoute>
             <ListOrders />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/Booking"
+        element={
+          <PrivateAdminRoute>
+            <DoctorAdding />
+          </PrivateAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/DoctorListing"
+        element={
+          <PrivateAdminRoute>
+            <DoctorListing />
           </PrivateAdminRoute>
         }
       />

@@ -34,7 +34,12 @@ const AdminNav = () => {
               </li>
               <li>
                 <Link to="#" class="text-gray-70 hover:text-orange-400">
-                  Add Careers
+                  Add doctor's
+                </Link>
+              </li>
+              <li>
+                <Link to="#" class="text-gray-70 hover:text-orange-400">
+                  List doctor's
                 </Link>
               </li>
               <li>
@@ -48,11 +53,6 @@ const AdminNav = () => {
               <li>
                 <Link to="#" class="text-gray-70 hover:text-orange-400">
                   List Orders
-                </Link>
-              </li>
-              <li>
-                <Link to="#" class="text-gray-70 hover:text-orange-400">
-                  List Careers
                 </Link>
               </li>
             </ul>
