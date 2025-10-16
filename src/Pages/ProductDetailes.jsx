@@ -192,23 +192,6 @@ const ProductDetails = () => {
 
             <p className="text-gray-600">{product.description}</p>
 
-            {/* Quantity Selector */}
-            <div className="flex items-center space-x-3">
-              <button
-                onClick={() => handleQuantityChange(-1)}
-                className="bg-gray-200 px-3 py-1 rounded text-lg"
-              >
-                -
-              </button>
-              <span className="text-lg font-medium">{quantity}</span>
-              <button
-                onClick={() => handleQuantityChange(1)}
-                className="bg-gray-200 px-3 py-1 rounded text-lg"
-              >
-                +
-              </button>
-            </div>
-
             {/* Buttons */}
             <div className="flex gap-4">
               <button
