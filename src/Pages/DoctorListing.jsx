@@ -36,40 +36,6 @@ const DoctorListing = () => {
     fetchDoctors();
   }, []);
 
-  // Delete doctor
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this doctor?")) return;
-    const { error } = await supabase.from("doctors").delete().eq("id", id);
-    if (error) alert("❌ Error deleting doctor: " + error.message);
-    else fetchDoctors();
-  };
-
-  // Open edit modal
-  const openEditModal = (doctor) => {
-    setEditDoctor(doctor);
-    setEditForm({ ...doctor });
-  };
-
-  // Handle edit form change
-  const handleEditChange = (e) => {
-    setEditForm({ ...editForm, [e.target.name]: e.target.value });
-  };
-
-  // Submit edit form
-  const handleEditSubmit = async (e) => {
-    e.preventDefault();
-    const { error } = await supabase
-      .from("doctors")
-      .update(editForm)
-      .eq("id", editDoctor.id);
-
-    if (error) alert("❌ Error updating doctor: " + error.message);
-    else {
-      setEditDoctor(null);
-      fetchDoctors();
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-teal-100 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -145,108 +111,11 @@ const DoctorListing = () => {
                       >
                         Book Now
                       </Link>
-
-                      <button
-                        onClick={() => openEditModal(doctor)}
-                        className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition"
-                      >
-                        <FaEdit />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(doctor.id)}
-                        className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition"
-                      >
-                        <FaTrash />
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
-          </div>
-        )}
-
-        {/* Edit Modal */}
-        {editDoctor && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-              <h2 className="text-xl font-bold mb-4">Edit Doctor</h2>
-              <form onSubmit={handleEditSubmit} className="space-y-3">
-                <input
-                  name="name"
-                  value={editForm.name}
-                  onChange={handleEditChange}
-                  className="w-full p-2 border rounded"
-                  placeholder="Doctor Name"
-                  required
-                />
-                <input
-                  name="specialty"
-                  value={editForm.specialty}
-                  onChange={handleEditChange}
-                  className="w-full p-2 border rounded"
-                  placeholder="Specialty"
-                />
-                <input
-                  name="rating"
-                  value={editForm.rating}
-                  onChange={handleEditChange}
-                  className="w-full p-2 border rounded"
-                  placeholder="Rating"
-                />
-                <input
-                  name="experience"
-                  value={editForm.experience}
-                  onChange={handleEditChange}
-                  className="w-full p-2 border rounded"
-                  placeholder="Experience"
-                />
-                <input
-                  name="price"
-                  value={editForm.price}
-                  onChange={handleEditChange}
-                  className="w-full p-2 border rounded"
-                  placeholder="Price"
-                />
-                <input
-                  name="image_url"
-                  value={editForm.image_url}
-                  onChange={handleEditChange}
-                  className="w-full p-2 border rounded"
-                  placeholder="Image URL"
-                />
-                <input
-                  name="location"
-                  value={editForm.location}
-                  onChange={handleEditChange}
-                  className="w-full p-2 border rounded"
-                  placeholder="Location"
-                />
-                <textarea
-                  name="description"
-                  value={editForm.description}
-                  onChange={handleEditChange}
-                  className="w-full p-2 border rounded"
-                  placeholder="Description"
-                ></textarea>
-
-                <div className="flex justify-end gap-2 mt-2">
-                  <button
-                    type="button"
-                    onClick={() => setEditDoctor(null)}
-                    className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-                  >
-                    Save
-                  </button>
-                </div>
-              </form>
-            </div>
           </div>
         )}
       </div>
