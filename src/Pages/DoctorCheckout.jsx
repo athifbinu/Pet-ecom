@@ -1,195 +1,188 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Star, Clock, MapPin } from "lucide-react";
 
 const DoctorCheckout = () => {
-  const { id } = useParams(); // doctor id from URL
+  const location = useLocation();
+  const { doctor } = location.state || {}; // ✅ Receive doctor data here
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    petName: "",
+    petType: "",
+    appointmentDate: "",
+    reason: "",
+  });
+
+  // handle input change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // handle form submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!doctor) {
+      alert("Doctor information missing!");
+      return;
+    }
+
+    // ✅ Prepare WhatsApp message
+    const message = `
+🩺 *New Doctor Booking!*
+
+👨‍⚕️ Doctor: ${doctor.name}
+⭐ Rating: ${doctor.rating}
+💼 Specialty: ${doctor.specialty}
+📍 Location: ${doctor.location}
+💰 Price: $${doctor.price}
+
+📞 *Customer Details:*
+👤 Name: ${formData.firstName} ${formData.lastName}
+📧 Email: ${formData.email}
+📱 Phone: ${formData.phone}
+🐾 Pet Name: ${formData.petName}
+🐶 Pet Type: ${formData.petType}
+📅 Appointment Date: ${formData.appointmentDate}
+📝 Reason: ${formData.reason}
+`;
+
+    // ✅ Encode message and open WhatsApp with admin number
+    const adminNumber = "919876543210"; // change to your admin’s WhatsApp number
+    const whatsappUrl = `https://wa.me/${adminNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
+  if (!doctor) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-gray-600 text-xl">
+        No doctor data found. Please go back and select a doctor.
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-teal-100 py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-          <div className="grid lg:grid-cols-2">
-            {/* Booking Form */}
-            <div className="p-8 lg:p-12">
-              <h2 className="text-3xl font-bold text-gray-800 mb-8">
-                Book Appointment
-              </h2>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10">
+        {/* Form Section */}
+        <div className="bg-white rounded-2xl shadow-xl p-8">
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">
+            Book Appointment
+          </h2>
 
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                      placeholder="Enter your first name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                      placeholder="Enter your last name"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Enter your email"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Enter your phone number"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Pet Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Enter your pet's name"
-                  />
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Pet Type
-                    </label>
-                    <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200">
-                      <option>Select pet type</option>
-                      <option>Dog</option>
-                      <option>Cat</option>
-                      <option>Bird</option>
-                      <option>Rabbit</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Appointment Date
-                    </label>
-                    <input
-                      type="date"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Reason for Visit
-                  </label>
-                  <textarea
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Describe your pet's condition or reason for visit"
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-orange-500 text-white py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition-all duration-200 transform hover:scale-105"
-                >
-                  Confirm Booking
-                </button>
-              </form>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid md:grid-cols-2 gap-4">
+              <input
+                name="firstName"
+                onChange={handleChange}
+                value={formData.firstName}
+                placeholder="First Name"
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500"
+                required
+              />
+              <input
+                name="lastName"
+                onChange={handleChange}
+                value={formData.lastName}
+                placeholder="Last Name"
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500"
+                required
+              />
             </div>
+            <input
+              name="email"
+              onChange={handleChange}
+              value={formData.email}
+              placeholder="Email"
+              type="email"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500"
+              required
+            />
+            <input
+              name="phone"
+              onChange={handleChange}
+              value={formData.phone}
+              placeholder="Phone Number"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500"
+              required
+            />
+            <input
+              name="petName"
+              onChange={handleChange}
+              value={formData.petName}
+              placeholder="Pet Name"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500"
+            />
+            <select
+              name="petType"
+              onChange={handleChange}
+              value={formData.petType}
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500"
+            >
+              <option value="">Select Pet Type</option>
+              <option>Dog</option>
+              <option>Cat</option>
+              <option>Bird</option>
+              <option>Rabbit</option>
+              <option>Other</option>
+            </select>
+            <input
+              name="appointmentDate"
+              onChange={handleChange}
+              value={formData.appointmentDate}
+              type="date"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500"
+              required
+            />
+            <textarea
+              name="reason"
+              onChange={handleChange}
+              value={formData.reason}
+              placeholder="Reason for visit"
+              rows={4}
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500"
+            ></textarea>
 
-            {/* Doctor Info */}
-            {selectedDoctor && (
-              <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 lg:p-12">
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">
-                  Appointment Summary
-                </h3>
+            <button
+              type="submit"
+              className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition-transform transform hover:scale-105"
+            >
+              Confirm Booking
+            </button>
+          </form>
+        </div>
 
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                  <img
-                    src={selectedDoctor.image}
-                    alt={selectedDoctor.name}
-                    className="w-20 h-20 rounded-full object-cover mb-4"
-                  />
-                  <h4 className="text-xl font-semibold text-gray-800 mb-2">
-                    {selectedDoctor.name}
-                  </h4>
-                  <p className="text-orange-600 font-medium mb-4">
-                    {selectedDoctor.specialty}
-                  </p>
-
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-center space-x-2">
-                      <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                      <span className="text-sm text-gray-600">
-                        {selectedDoctor.rating} Rating
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Clock className="h-4 w-4 text-gray-400" />
-                      <span className="text-sm text-gray-600">
-                        {selectedDoctor.experience} Experience
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <MapPin className="h-4 w-4 text-gray-400" />
-                      <span className="text-sm text-gray-600">
-                        {selectedDoctor.location}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="border-t pt-4">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-600">Consultation Fee</span>
-                      <span className="font-semibold">
-                        ${selectedDoctor.price}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-600">Service Fee</span>
-                      <span className="font-semibold">$10</span>
-                    </div>
-                    <div className="border-t pt-2 mt-2">
-                      <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-gray-800">
-                          Total
-                        </span>
-                        <span className="text-2xl font-bold text-orange-500">
-                          ${selectedDoctor.price + 10}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => setCurrentPage("doctors")}
-                  className="mt-6 w-full border-2 border-orange-500 text-orange-600 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-all duration-200"
-                >
-                  Change Doctor
-                </button>
-              </div>
-            )}
+        {/* Doctor Info */}
+        <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
+          <img
+            src={doctor.image_url || "/default-doctor.png"}
+            alt={doctor.name}
+            className="w-32 h-32 mx-auto rounded-full object-cover mb-4"
+          />
+          <h3 className="text-2xl font-bold text-gray-800">{doctor.name}</h3>
+          <p className="text-orange-600 font-medium mb-2">{doctor.specialty}</p>
+          <div className="flex justify-center gap-3 text-gray-500 text-sm mb-3">
+            <div className="flex items-center gap-1">
+              <Star className="w-4 h-4 text-yellow-500" /> {doctor.rating}
+            </div>
+            <div className="flex items-center gap-1">
+              <Clock className="w-4 h-4" /> {doctor.experience} yrs
+            </div>
+            <div className="flex items-center gap-1">
+              <MapPin className="w-4 h-4" /> {doctor.location}
+            </div>
+          </div>
+          <div className="border-t pt-3">
+            <p className="text-gray-700">
+              <span className="font-semibold">Consultation Fee:</span> $
+              {doctor.price}
+            </p>
           </div>
         </div>
       </div>

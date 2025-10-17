@@ -145,6 +145,7 @@ const DoctorListing = () => {
                       >
                         Book Now
                       </Link>
+
                       <button
                         onClick={() => openEditModal(doctor)}
                         className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition"
