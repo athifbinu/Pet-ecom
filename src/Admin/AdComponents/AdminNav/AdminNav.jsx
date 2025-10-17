@@ -57,7 +57,10 @@ const AdminNav = () => {
                 </Link>
               </li>
               <li>
-                <Link to="#" class="text-gray-70 hover:text-orange-400">
+                <Link
+                  to="/admin/orders"
+                  class="text-gray-70 hover:text-orange-400"
+                >
                   List Orders
                 </Link>
               </li>
