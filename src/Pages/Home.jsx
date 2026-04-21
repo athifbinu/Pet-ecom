@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import heroImage from "../assets/images/mane.png";
 import aboutImage from "../assets/images/aboutus.png";
 import CategorysCard from "../components/Ui/CategorysCard";
@@ -114,36 +115,111 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-rose-100 via-pink-50 to-teal-100 py-40 overflow-hidden">
-        <div className="container mx-auto grid md:grid-cols-2 gap-10 items-center px-6">
+      <section className="relative bg-gradient-to-br from-rose-50 via-teal-50 to-indigo-50 py-32 md:py-48 overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+          <motion.div 
+            animate={{ y: [0, -20, 0], opacity: [0.5, 0.8, 0.5] }} 
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-10 left-10 w-40 h-40 bg-rose-300/30 rounded-full blur-3xl"
+          ></motion.div>
+          <motion.div 
+            animate={{ x: [0, 30, 0], opacity: [0.3, 0.6, 0.3] }} 
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute bottom-10 right-20 w-64 h-64 bg-teal-300/30 rounded-full blur-3xl"
+          ></motion.div>
+          <motion.div 
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }} 
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border-[1px] border-gray-200/50 rounded-full border-dashed"
+          ></motion.div>
+        </div>
+
+        <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center px-6 relative z-10">
           {/* Left Content */}
-          <div className="space-y-6 text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-gray-800">
-              Mtm Veterinary Medicines <br />
-              <span className="text-primary">& PetShop</span>
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="space-y-8 text-center md:text-left flex flex-col items-center md:items-start"
+          >
+            <div className="inline-block px-4 py-1.5 rounded-full bg-teal-100/80 border border-teal-200 text-teal-800 text-sm font-semibold tracking-wide backdrop-blur-md">
+              ✨ Premium Pet Care Solutions
+            </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-gray-900 drop-shadow-sm">
+              <span className="block mb-2 text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-gray-600">MTM Veterinary</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-400">& PetShop</span>
             </h1>
-            <p className="text-lg text-gray-600">
-              Your Pet’s Happiness, Our Priority 🐾
+            <p className="text-lg md:text-xl text-gray-600 max-w-lg leading-relaxed">
+              Your Pet’s Happiness is Our Priority! Discover top-quality medicines, delicious food, and fun accessories for your furry friends. 🐾
             </p>
-            <Link to="/shop">
-              <button className="bg-primary text-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg hover:bg-primary/90 transition-all">
-                Shop Now
-              </button>
-            </Link>
-          </div>
+            
+            <div className="flex gap-4">
+              <Link to="/shop">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-gradient-to-r from-teal-500 to-emerald-500 text-white px-8 py-4 rounded-full shadow-xl shadow-teal-500/30 hover:shadow-2xl hover:shadow-teal-500/40 transition-all font-semibold text-lg flex items-center gap-2"
+                >
+                  Shop Now
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </motion.button>
+              </Link>
+            </div>
+          </motion.div>
 
           {/* Right Content - Hero Image */}
-          <div className="relative flex justify-center items-center">
-            <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl p-6">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="relative flex justify-center items-center mt-10 md:mt-0"
+          >
+            {/* Glassmorphism Card */}
+            <motion.div 
+              animate={{ y: [-10, 10, -10] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="bg-white/40 border border-white/60 backdrop-blur-xl rounded-[2rem] shadow-2xl p-8 md:p-12 relative z-20"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-[2rem] pointer-events-none"></div>
               <img
-                className="w-full max-w-sm drop-shadow-lg animate-bounce-slow"
+                className="w-full max-w-sm md:max-w-md drop-shadow-2xl relative z-10"
                 src={heroImage}
-                alt="Hero"
+                alt="Happy pet looking at products"
               />
-            </div>
-            <div className="absolute -top-6 -right-6 w-20 h-20 bg-primary/20 rounded-full blur-2xl"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-teal-200/20 rounded-full blur-3xl"></div>
-          </div>
+            </motion.div>
+            
+            {/* Decorative Floating Cards */}
+            <motion.div 
+              animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              className="absolute -top-8 -right-4 md:-right-8 bg-white/90 backdrop-blur-md p-3 md:p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 z-30"
+            >
+              <div className="bg-yellow-100 p-2 rounded-full">
+                <img src={star} className="w-5 h-5 md:w-6 md:h-6" alt="Star" />
+              </div>
+              <div>
+                <p className="text-xs md:text-sm font-bold text-gray-800">4.9/5</p>
+                <p className="text-[10px] md:text-xs text-gray-500">Top Rated</p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute -bottom-6 -left-4 md:-left-8 bg-white/90 backdrop-blur-md p-3 md:p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 z-30"
+            >
+              <div className="bg-teal-100 p-2 rounded-full">
+                <img src={HappyFace} className="w-5 h-5 md:w-6 md:h-6" alt="Happy Face" />
+              </div>
+              <div>
+                <p className="text-xs md:text-sm font-bold text-gray-800">10k+</p>
+                <p className="text-[10px] md:text-xs text-gray-500">Happy Pets</p>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
