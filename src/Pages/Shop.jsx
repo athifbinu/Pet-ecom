@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import CommonSection from "../components/Ui/CommonSection";
 import ProductCard from "../components/Ui/ProductCard";
-
+import { useSearchParams } from "react-router-dom";
 import { supabase } from "../components/supabase/supabaseClient";
 
 const Shop = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get("category") || "";
+
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState(initialCategory);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -16,7 +19,6 @@ const Shop = () => {
         const { data, error } = await supabase.from("products").select("*");
         if (error) throw error;
         setProducts(data);
-        setFilteredProducts(data);
       } catch (err) {
         console.error("Failed to fetch products:", err.message);
       }
@@ -25,14 +27,29 @@ const Shop = () => {
     fetchProducts();
   }, []);
 
+  // Update URL search params when categoryFilter changes
+  const handleCategoryChange = (e) => {
+    const newCategory = e.target.value;
+    setCategoryFilter(newCategory);
+    
+    if (newCategory) {
+      setSearchParams({ category: newCategory });
+    } else {
+      setSearchParams({});
+    }
+  };
+
   useEffect(() => {
     const filtered = products.filter((product) => {
       const matchesSearch = product.name
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
+      
+      // Case-insensitive match or exact match depending on data, but here exact match is fine
       const matchesCategory = categoryFilter
         ? product.category === categoryFilter
         : true;
+        
       return matchesSearch && matchesCategory;
     });
 
@@ -62,7 +79,7 @@ const Shop = () => {
         <select
           className="w-full p-2.5 text-gray-500 border rounded-md shadow-sm focus:border-orange-400"
           value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value)}
+          onChange={handleCategoryChange}
         >
           <option value="">All Categories</option>
           <option value="Foods">Foods</option>
