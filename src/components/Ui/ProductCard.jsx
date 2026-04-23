@@ -42,8 +42,32 @@ const ProductCard = ({ item }) => {
     e.preventDefault();
     if (isInWatchlist) {
       dispatch(likeActions.removeFromLike(item.id));
+      Swal.fire({
+        title: "Removed from Wishlist",
+        text: `${item.name} has been removed.`,
+        icon: "info",
+        iconColor: "#ef4444",
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        background: "#ffffff",
+      });
     } else {
       dispatch(likeActions.addToLike(item));
+      Swal.fire({
+        title: "Added to Wishlist!",
+        text: `${item.name} has been saved.`,
+        icon: "success",
+        iconColor: "#ef4444",
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        background: "#ffffff",
+      });
     }
   };
 
