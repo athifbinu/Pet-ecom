@@ -2,9 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../Redux/Slices/CartSlice";
 import { likeActions } from "../../Redux/Slices/LikeSlice";
-import { Heart, ShoppingCart, Star } from "lucide-react";
+import { Heart, ShoppingCart, Star, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
 import "animate.css";
 
 const ProductCard = ({ item }) => {
@@ -13,31 +14,32 @@ const ProductCard = ({ item }) => {
 
   const isInWatchlist = likedItems.some((i) => i.id === item.id);
 
-  const addToCart = () => {
+  const addToCart = (e) => {
+    e.preventDefault(); // Prevent link navigation if button is inside link area
     dispatch(cartActions.addItem(item));
 
     Swal.fire({
-      title: "🎉 Added to Cart!",
+      title: "Added to Cart!",
       text: `${item.name} has been added successfully.`,
       icon: "success",
-      confirmButtonText: "OK",
-      background: "#f9fafb",
-      confirmButtonColor: "#2563eb",
-      customClass: {
-        popup: "rounded-xl shadow-lg",
-      },
+      iconColor: "#3b82f6",
+      confirmButtonText: "Continue Shopping",
+      background: "#ffffff",
+      confirmButtonColor: "#3b82f6",
+      customClass: { popup: "rounded-2xl shadow-xl" },
       timer: 2000,
       timerProgressBar: true,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: "animate__animated animate__zoomIn animate__faster"
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
-      },
+        popup: "animate__animated animate__zoomOut animate__faster"
+      }
     });
   };
 
-  const toggleWatchlist = () => {
+  const toggleWatchlist = (e) => {
+    e.preventDefault();
     if (isInWatchlist) {
       dispatch(likeActions.removeFromLike(item.id));
     } else {
@@ -46,87 +48,110 @@ const ProductCard = ({ item }) => {
   };
 
   return (
-<div className="group relative bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 hover:border-gray-200">
-  {item.isOnSale && (
-    <div className="absolute top-3 left-3 z-10 bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-medium shadow">
-      Sale
-    </div>
-  )}
-
-  <button
-    onClick={toggleWatchlist}
-    className="absolute top-3 right-3 z-10 p-1.5 bg-white/80 backdrop-blur-sm rounded-full shadow hover:bg-white hover:scale-110 transition"
-  >
-    <Heart
-      className={`w-4 h-4 ${
-        isInWatchlist ? "text-red-500 fill-red-500" : "text-gray-500"
-      }`}
-    />
-  </button>
-
-  <Link to="/details" state={{ product: item }}>
-    <div className="relative overflow-hidden bg-gray-50 aspect-[4/3]"> 
-      {/* 👆 Reduced from aspect-square to 4:3 ratio */}
-      <img
-        src={item.image_url}
-        alt={item.name}
-        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-      />
-    </div>
-  </Link>
-
-  <div className="p-4"> {/* 👇 Reduced from p-6 */}
-    <span className="inline-block px-2 py-0.5 bg-blue-50 text-blue-700 text-xs font-medium rounded mb-2 border border-blue-100">
-      {item.category}
-    </span>
-
-    <h3 className="text-base font-semibold text-gray-900 mb-1 line-clamp-1 group-hover:text-blue-600">
-      {item.name}
-    </h3>
-
-    <div className="flex items-center gap-1 mb-2">
-      {[...Array(5)].map((_, i) => (
-        <Star
-          key={i}
-          className={`w-3.5 h-3.5 ${
-            i < (item.rating || 4)
-              ? "text-yellow-400 fill-current"
-              : "text-gray-300"
-          }`}
-        />
-      ))}
-      <span className="text-xs text-gray-500">
-        {item.rating || 4}
-      </span>
-    </div>
-
-    <p className="text-gray-500 text-xs mb-2 line-clamp-1">
-      {item.description}
-    </p>
-
-    <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-      <div className="flex items-center gap-1">
-        <span className="text-lg font-bold text-gray-900">
-          ₹{item.price}
-        </span>
-        {item.originalPrice && (
-          <span className="text-sm text-gray-400 line-through">
-            ₹{item.originalPrice}
-          </span>
+    <motion.div
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.3 }}
+      className="group relative bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 flex flex-col h-full"
+    >
+      {/* Badges */}
+      <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
+        {item.isOnSale && (
+          <motion.div 
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md shadow-red-500/30"
+          >
+            SALE
+          </motion.div>
+        )}
+        {(item.rating >= 4.5 || !item.rating) && (
+          <motion.div 
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md shadow-emerald-500/30 flex items-center gap-1"
+          >
+            <Star className="w-3 h-3 fill-white" /> BEST
+          </motion.div>
         )}
       </div>
 
-      <button
-        onClick={addToCart}
-        className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-sm font-medium"
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={toggleWatchlist}
+        className="absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors"
       >
-        <ShoppingCart className="w-3.5 h-3.5" />
-        Add
-      </button>
-    </div>
-  </div>
-</div>
+        <Heart
+          className={`w-4 h-4 ${
+            isInWatchlist ? "text-red-500 fill-red-500" : ""
+          }`}
+        />
+      </motion.button>
 
+      <Link to="/details" state={{ product: item }} className="flex-grow flex flex-col pt-2">
+        <div className="relative overflow-hidden aspect-[4/3] w-full p-4 flex items-center justify-center"> 
+          <img
+            src={item.image_url || item.images?.[0]}
+            alt={item.name}
+            className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
+          />
+          
+          {/* Quick View Overlay (Hidden by default, shown on hover) */}
+          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full font-semibold text-sm shadow-lg flex items-center gap-2 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+            >
+              <Eye className="w-4 h-4" /> Quick View
+            </motion.div>
+          </div>
+        </div>
+
+        <div className="p-5 flex flex-col flex-grow"> 
+          <div className="flex justify-between items-start mb-2">
+            <span className="inline-block px-2.5 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-md uppercase tracking-wider">
+              {item.category || item.category_name || "Pet Product"}
+            </span>
+            <div className="flex items-center gap-1">
+              <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
+              <span className="text-xs font-bold text-gray-700">
+                {item.rating || 4.5}
+              </span>
+            </div>
+          </div>
+
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 line-clamp-1 group-hover:text-blue-600 transition-colors">
+            {item.name}
+          </h3>
+
+          <p className="text-gray-500 text-xs sm:text-sm mb-4 line-clamp-2 leading-relaxed flex-grow bg-white">
+            {item.description || "High quality product for your lovely pets. Provides the best nutrition and care."}
+          </p>
+
+          <div className="flex items-end justify-between pt-4 border-t border-gray-100 mt-auto bg-white">
+            <div className="flex flex-col">
+              {item.originalPrice && (
+                <span className="text-xs text-gray-400 line-through mb-0.5">
+                  ₹{item.originalPrice}
+                </span>
+              )}
+              <span className="text-xl font-black text-gray-900">
+                ₹{item.price}
+              </span>
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={addToCart}
+              className="relative overflow-hidden group/btn flex items-center justify-center w-10 h-10 bg-gray-900 hover:bg-black text-white rounded-xl shadow-md transition-all"
+            >
+              <ShoppingCart className="w-4 h-4 relative z-10 flex-shrink-0" />
+            </motion.button>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
   );
 };
 
