@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "../components/supabase/supabaseClient";
 import { motion } from "framer-motion";
 import { User, Mail, Phone, MapPin, Building2, Globe2, Hash, ArrowLeft, ShieldCheck, Truck, MessageCircle } from "lucide-react";
@@ -27,8 +27,14 @@ const InputField = ({ icon: Icon, ...props }) => (
 );
 
 const Checkout = () => {
-  const { cartItems, totalAmount } = useSelector((state) => state.cart);
+  const { cartItems: reduxCartItems, totalAmount: reduxTotalAmount } = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const location = useLocation();
+  const buyNowProduct = location.state?.buyNowProduct;
+  
+  const cartItems = buyNowProduct ? [buyNowProduct] : reduxCartItems;
+  const totalAmount = buyNowProduct ? (buyNowProduct.price * buyNowProduct.quantity) : reduxTotalAmount;
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -44,10 +50,10 @@ const Checkout = () => {
   });
 
   useEffect(() => {
-    if (cartItems.length === 0) {
+    if (!buyNowProduct && reduxCartItems.length === 0) {
       navigate("/shop");
     }
-  }, [cartItems, navigate]);
+  }, [buyNowProduct, reduxCartItems.length, navigate]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -105,6 +111,15 @@ ${productList
 
       if (error) {
         throw error;
+      }
+
+      // Automatically Send Email via Secure Supabase Edge Function
+      try {
+        await supabase.functions.invoke('send-order-email', {
+          body: { formData, productList, totalAmount }
+        });
+      } catch (emailError) {
+        console.error("Automated email failed to send, but order was placed:", emailError);
       }
 
       await Swal.fire({
@@ -165,7 +180,7 @@ ${productList
           <p className="text-gray-500 mt-2">Please fill in your details to complete your order.</p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Form */}
           <motion.form 
             variants={formVariants}
@@ -180,11 +195,11 @@ ${productList
                 <User className="w-5 h-5 text-blue-600" /> Contact Information
               </h2>
               
-              <div className="grid sm:grid-cols-2 gap-x-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
                 <InputField icon={User} type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" required />
                 <InputField icon={User} type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" required />
               </div>
-              <div className="grid sm:grid-cols-2 gap-x-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
                 <InputField icon={Mail} type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" required />
                 <InputField icon={Phone} type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" required />
               </div>
@@ -198,7 +213,7 @@ ${productList
               <InputField icon={MapPin} type="text" name="address" value={formData.address} onChange={handleChange} placeholder="Street Address (Flat, House no, Building)" required />
               <InputField icon={Building2} type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark (Optional)" />
               
-              <div className="grid sm:grid-cols-3 gap-x-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-4">
                 <InputField icon={Building2} type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
                 <InputField icon={Globe2} type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" required />
                 <InputField icon={Hash} type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" required />
@@ -206,7 +221,7 @@ ${productList
             </motion.div>
 
             <motion.div variants={formVariants} className="mt-10 pt-8 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-6">
-              <div className="flex items-center gap-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
                 {[gp, pt, pn, ms, bhim, mc, vs].map((icon, i) => (
                   <img key={i} className="h-4 sm:h-5 object-contain" src={icon} alt="payment method" />
                 ))}
@@ -242,9 +257,9 @@ ${productList
               
               <div className="max-h-[350px] overflow-y-auto pr-2 custom-scrollbar mb-6">
                 {cartItems.map((item) => (
-                  <div key={item.id} className="flex gap-4 mb-4 items-center">
-                    <div className="relative">
-                      <div className="w-16 h-16 bg-gray-50 rounded-xl p-2 border border-gray-100">
+                  <div key={item.id} className="flex gap-3 sm:gap-4 mb-4 items-center">
+                    <div className="relative flex-shrink-0">
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-50 rounded-xl p-2 border border-gray-100">
                         <img
                           src={item.imgUrl}
                           className="w-full h-full object-contain mix-blend-multiply"

@@ -351,7 +351,16 @@ const ProductDetails = () => {
                 whileTap={{ scale: 0.98 }}
                 onClick={() =>
                   navigate("/checkout", {
-                    state: { product: { ...product, quantity } },
+                    state: { 
+                      buyNowProduct: {
+                        id: product.id,
+                        productName: product.name,
+                        imgUrl: mainImage,
+                        price: product.price,
+                        quantity: quantity,
+                        totalprice: product.price * quantity
+                      }
+                    },
                   })
                 }
                 className="w-full sm:flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white h-[52px] rounded-xl flex items-center justify-center gap-2 font-bold shadow-lg shadow-blue-500/30 transition-all"
