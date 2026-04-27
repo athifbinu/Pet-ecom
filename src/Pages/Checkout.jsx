@@ -113,18 +113,16 @@ ${productList
         throw error;
       }
 
-      // Automatically Send Email via Vercel Serverless Function
+      // Automatically Send Email via Supabase Edge Function
       try {
-        const emailRes = await fetch('/api/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ formData, productList, totalAmount })
+        const { data, error: emailError } = await supabase.functions.invoke('send-order-email', {
+          body: { formData, productList, totalAmount }
         });
         
-        if (!emailRes.ok) {
-          console.error("Automated email failed to send with status:", emailRes.status);
+        if (emailError) {
+          console.error("Automated email failed to send:", emailError);
+        } else {
+          console.log("Email sent successfully:", data);
         }
       } catch (emailError) {
         console.error("Automated email failed to send, but order was placed:", emailError);
