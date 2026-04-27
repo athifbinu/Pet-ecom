@@ -99,17 +99,17 @@ const Home = () => {
     fetchCategories();
   }, []);
 
-  const sliderImages = [
-    sliderone,
-    slidertwo,
-    sliderthree,
-    sliderfoor,
-    sliderfive,
-    slidersix,
-    sliderseven,
-    slidereight,
-    slidernine,
-    sliderten,
+  const categorySlides = [
+    { img: sliderone, label: "Dog Food", value: "Foods" },
+    { img: slidertwo, label: "Cages", value: "CagesAndBagsBeds" },
+    { img: sliderthree, label: "Treats", value: "Foods" },
+    { img: sliderfoor, label: "Grooming", value: "Grooming" },
+    { img: sliderfive, label: "Litters", value: "CatLittersitems" },
+    { img: slidersix, label: "Collars", value: "CollerAndLeash" },
+    { img: sliderseven, label: "Toys", value: "Toys" },
+    { img: slidereight, label: "Feeds", value: "Feeders" },
+    { img: slidernine, label: "Pharmacy", value: "Pharmacy" },
+    { img: sliderten, label: "Poultry", value: "Polutry" },
   ];
 
   return (
@@ -224,66 +224,154 @@ const Home = () => {
       </section>
 
       {/* About Us Section */}
+      <section className="relative bg-white py-20 sm:py-32 overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-teal-50/50 blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-orange-50/50 blur-3xl pointer-events-none"></div>
 
-      <section className="bg-white py-16 sm:py-28">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            {/* Left Image */}
-            <div className="w-full">
-              <img
-                className="rounded-lg shadow-lg"
-                src={aboutImage}
-                alt="About MTM Veterinary Medicals & Petshop"
-              />
-            </div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+            {/* Left Image Side */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative w-full max-w-md mx-auto lg:max-w-none"
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-teal-900/10 border-[6px] border-white z-10 group">
+                <img
+                  className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  src={aboutImage}
+                  alt="About MTM Veterinary Medicals & Petshop"
+                />
+                <div className="absolute inset-0 bg-teal-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
+              </div>
+              
+              {/* Decorative background shape */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-teal-400 to-emerald-300 rounded-3xl transform translate-x-6 translate-y-6 -z-10 opacity-70"></div>
+              
+              {/* Floating Experience Badge */}
+              <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -bottom-6 -left-6 bg-white p-4 sm:p-5 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-4 z-20"
+              >
+                <div className="bg-orange-100 text-orange-600 p-3 rounded-xl">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-xl sm:text-2xl font-bold text-gray-900">Expert</h4>
+                  <p className="text-xs sm:text-sm text-gray-500 font-medium uppercase tracking-wide">Pet Care</p>
+                </div>
+              </motion.div>
+            </motion.div>
 
             {/* Right Content */}
-            <div className="w-full md:pl-8">
-              <h2 className="text-2xl md:text-3xl font-bold mb-5">
-                About <span className="text-orange-400">Us</span>
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              className="w-full lg:pl-8 flex flex-col justify-center mt-10 lg:mt-0"
+            >
+              <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-orange-600 font-semibold text-sm self-start">
+                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                   <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                 </svg>
+                 About Us
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">
+                Your Trusted <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-400">Partner</span> in Pet Health
               </h2>
-              <p className="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
-                Welcome to{" "}
-                <span className="font-semibold">
-                  MTM Veterinary Medicals & Petshop
-                </span>
-                , your trusted destination for all veterinary medicines, pet
-                foods, and accessories. We are passionate about keeping your
-                pets healthy and happy with top-quality products and expert
-                care.
+              
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed font-medium">
+                Welcome to <span className="text-teal-700 font-bold">MTM Veterinary Medicals & Petshop</span>. We are passionate about keeping your pets healthy and happy with top-quality products and expert care.
               </p>
-              <p className="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
-                From essential veterinary supplies to nutritious foods and fun
-                accessories, we bring everything under one roof. With years of
-                experience, we are proud to serve our community and support pet
-                parents with love and dedication.
-              </p>
+              
+              <div className="space-y-4 mb-10">
+                {[
+                  "Premium veterinary medicines and supplies",
+                  "Nutritious, high-quality pet foods",
+                  "Fun and engaging pet accessories"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-700 font-semibold text-lg">{item}</span>
+                  </div>
+                ))}
+              </div>
 
-              <button className="bg-orange-600 text-white hover:bg-orange-500 transition rounded-md px-6 py-3 font-medium shadow-md">
-                Learn More
-              </button>
-            </div>
+              <Link to="/Doctor">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-gradient-to-r from-orange-500 to-rose-500 text-white hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300 rounded-full px-8 py-4 font-bold text-lg shadow-md self-start flex items-center gap-2"
+                >
+                  Consult A Doctor
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </motion.button>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Categories Slider */}
-      <section>
-        <div className="container mb-8 px-4">
-          <h3 className="text-2xl font-bold mb-6 text-center text-gray-700">
-            Explore Categories
-          </h3>
-          <div className="w-full overflow-hidden">
-            <Slider {...categorySliderSettings}>
-              {sliderImages.map((img, index) => (
-                <div key={index} className="px-4 flex justify-center">
-                  <Link to="/shop">
-                    <div className="w-52 h-52 rounded-full overflow-hidden   flex items-center justify-center">
-                      <img
-                        src={img}
-                        alt={`category-${index}`}
-                        className="w-full h-full object-cover"
-                      />
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50/50">
+        <div className="container px-4">
+          <div className="text-center mb-16 relative">
+             <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+             >
+                <div className="inline-flex items-center justify-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-600 font-medium text-sm">
+                   <img src={star} className="w-4 h-4 opacity-70" alt="star" />
+                   Our Collections
+                   <img src={star} className="w-4 h-4 opacity-70" alt="star" />
+                </div>
+                <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight relative inline-block">
+                  Explore Categories
+                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-20 h-1.5 bg-gradient-to-r from-teal-400 to-emerald-400 rounded-full"></div>
+                </h2>
+                <p className="text-gray-500 mt-8 max-w-2xl mx-auto text-lg">
+                  Find everything your pet needs, carefully organized into our premium collections.
+                </p>
+             </motion.div>
+          </div>
+          
+          <div className="w-full -mx-2">
+            <Slider {...categorySliderSettings} className="px-2">
+              {categorySlides.map((slide, index) => (
+                <div key={index} className="px-3 pb-8 pt-6 outline-none">
+                  <Link to={`/shop?category=${slide.value}`} className="group block focus:outline-none">
+                    <div className="flex flex-col items-center">
+                      <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full overflow-hidden bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] group-hover:shadow-[0_20px_40px_rgb(20,184,166,0.2)] border-[6px] border-white transition-all duration-500 ease-out group-hover:-translate-y-3 z-10">
+                        {/* Overlay for depth */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-teal-900/5 group-hover:bg-transparent transition-colors duration-300 z-10 pointer-events-none"></div>
+                        <img
+                          src={slide.img}
+                          alt={slide.label}
+                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                        />
+                      </div>
+                      <div className="mt-4 bg-white border border-gray-100 shadow-sm rounded-full px-8 py-2.5 -translate-y-8 group-hover:-translate-y-10 transition-transform duration-500 z-20 group-hover:bg-gradient-to-r group-hover:from-teal-50 group-hover:to-emerald-50 group-hover:border-teal-200">
+                        <h4 className="text-sm md:text-base font-bold text-gray-800 group-hover:text-teal-700 transition-colors whitespace-nowrap">
+                          {slide.label}
+                        </h4>
+                      </div>
                     </div>
                   </Link>
                 </div>
