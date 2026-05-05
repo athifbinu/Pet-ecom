@@ -6,6 +6,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 const ListProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
   const [editProduct, setEditProduct] = useState(null);
   const [editForm, setEditForm] = useState({
     name: "",
@@ -31,11 +32,30 @@ const ListProducts = () => {
     fetchProducts();
   }, []);
 
+  const totalProducts = products.length;
+  const totalCategories = new Set(
+    products.map((product) => product.category).filter(Boolean),
+  ).size;
+
+  const filteredProducts = products.filter((product) => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return true;
+
+    return [
+      product.name,
+      product.category,
+      product.subcategory,
+      product.description,
+    ]
+      .filter(Boolean)
+      .some((field) => field.toLowerCase().includes(query));
+  });
+
   const handleDelete = async (id) => {
-    const confirm = window.confirm(
-      "Are you sure you want to delete this product?"
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this product?",
     );
-    if (!confirm) return;
+    if (!confirmed) return;
 
     const { error } = await supabase.from("products").delete().eq("id", id);
     if (error) {
@@ -81,55 +101,142 @@ const ListProducts = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold text-center mb-8">All Products</h2>
-
-      {loading ? (
-        <div className="flex justify-center items-center h-40">
-          <ImSpinner className="animate-spin text-3xl text-orange-500" />
+      <div className="rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-100 p-8 shadow-xl">
+        <div className="mb-10 text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-slate-900">
+            Admin Product Catalog
+          </h2>
+          <p className="mt-3 text-slate-500 max-w-2xl mx-auto">
+            Browse, search, and manage your inventory with a modern admin
+            interface.
+          </p>
         </div>
-      ) : products.length === 0 ? (
-        <p className="text-center text-gray-500">No products found.</p>
-      ) : (
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="border rounded-lg p-4 shadow hover:shadow-md transition bg-white flex flex-col"
-            >
-              <img
-                src={product.image_url}
-                alt={product.name}
-                className="w-full h-48 object-cover rounded mb-4"
-              />
-              <h3 className="text-xl font-bold">{product.name}</h3>
-              <p className="text-orange-500 font-semibold text-lg">
-                ₹ {product.price}
-              </p>
-              <p className="text-sm text-gray-600 mb-2">
-                {product.category} / {product.subcategory}
-              </p>
-              <p className="text-sm text-gray-700 flex-grow">
-                {product.description}
-              </p>
 
-              <div className="mt-4 flex justify-between">
-                <button
-                  onClick={() => openEditModal(product)}
-                  className="flex items-center gap-2 bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600"
-                >
-                  <FaEdit /> Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(product.id)}
-                  className="flex items-center gap-2 bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600"
-                >
-                  <FaTrash /> Delete
-                </button>
+        <div className="grid gap-4 sm:grid-cols-3 mb-8">
+          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+              Total products
+            </p>
+            <p className="mt-4 text-3xl font-semibold text-slate-900">
+              {totalProducts}
+            </p>
+          </div>
+          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+              Visible
+            </p>
+            <p className="mt-4 text-3xl font-semibold text-slate-900">
+              {filteredProducts.length}
+            </p>
+          </div>
+          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+              Categories
+            </p>
+            <p className="mt-4 text-3xl font-semibold text-slate-900">
+              {totalCategories}
+            </p>
+          </div>
+        </div>
+
+        <div className="mb-8 grid gap-4 lg:grid-cols-[1.5fr_1fr]">
+          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+                  Product search
+                </p>
+                <p className="mt-2 text-slate-500 text-sm">
+                  Find items by name, category, subcategory or description.
+                </p>
               </div>
             </div>
-          ))}
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search products..."
+              className="mt-5 w-full rounded-3xl border border-slate-200 bg-slate-50 px-5 py-4 text-slate-700 outline-none ring-2 ring-transparent transition focus:border-orange-400 focus:ring-orange-200"
+            />
+          </div>
+
+          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+              Quick tip
+            </p>
+            <p className="mt-3 text-slate-600 text-sm leading-6">
+              Use the search field to narrow down results instantly. Select a
+              card to edit or delete items directly from the catalog.
+            </p>
+          </div>
         </div>
-      )}
+
+        {loading ? (
+          <div className="flex justify-center items-center h-40">
+            <ImSpinner className="animate-spin text-4xl text-orange-500" />
+          </div>
+        ) : filteredProducts.length === 0 ? (
+          <div className="rounded-3xl border border-dashed border-slate-300 bg-white/70 p-10 text-center text-slate-600 shadow-sm">
+            <p className="text-xl font-semibold">No matching products found.</p>
+            <p className="mt-2 text-sm text-slate-500">
+              Try a different keyword or clear the search box.
+            </p>
+          </div>
+        ) : (
+          <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-6">
+            {filteredProducts.map((product) => (
+              <div
+                key={product.id}
+                className="group overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={product.image_url}
+                    alt={product.name}
+                    className="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute right-4 top-4 rounded-full bg-orange-500 px-3 py-1 text-sm font-semibold text-white shadow-lg">
+                    ₹{product.price}
+                  </div>
+                </div>
+
+                <div className="p-5 sm:p-6">
+                  <h3 className="text-xl font-semibold text-slate-900">
+                    {product.name}
+                  </h3>
+                  <p className="mt-2 max-h-16 overflow-hidden text-sm text-slate-500 text-ellipsis">
+                    {product.description || "No description available."}
+                  </p>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+                      {product.category || "Uncategorized"}
+                    </span>
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+                      {product.subcategory || "General"}
+                    </span>
+                  </div>
+
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <button
+                      onClick={() => openEditModal(product)}
+                      className="inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+                    >
+                      <FaEdit className="mr-2" /> Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(product.id)}
+                      className="inline-flex items-center justify-center rounded-full bg-red-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-600"
+                    >
+                      <FaTrash className="mr-2" /> Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Edit Modal */}
       {editProduct && (
