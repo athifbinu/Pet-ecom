@@ -180,7 +180,14 @@ const AddProduct = () => {
   const [subCategory, setSubCategory] = useState("");
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files?.[0] || null;
+    setImageFile(file);
+    setImagePreview(file ? URL.createObjectURL(file) : null);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -223,6 +230,7 @@ const AddProduct = () => {
       setSubCategory("");
       setDescription("");
       setImageFile(null);
+      setImagePreview(null);
       if (fileInputRef.current) {
         fileInputRef.current.value = null; // Reset file input
       }
@@ -235,90 +243,219 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4">
-      <h2 className="text-3xl font-bold mb-6 text-center">Add Product</h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <input
-          type="text"
-          placeholder="Product Name"
-          className="w-full p-3 border rounded"
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-          required
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          className="w-full p-3 border rounded"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          required
-        />
+    <div className="max-w-6xl mx-auto py-10 px-4">
+      <div className="rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-100 p-8 shadow-xl">
+        <div className="mb-10 text-center">
+          <p className="text-sm uppercase tracking-[0.35em] text-orange-500">
+            Product Management
+          </p>
+          <h2 className="mt-4 text-4xl font-bold text-slate-900 tracking-tight">
+            Add a New Product
+          </h2>
+          <p className="mt-3 text-slate-500 max-w-2xl mx-auto">
+            Enter product details, upload a compelling image, and preview the
+            product before submission.
+          </p>
+        </div>
 
-        <select
-          className="w-full p-3 border rounded"
-          value={category}
-          onChange={(e) => {
-            setCategory(e.target.value);
-            setSubCategory("");
-          }}
-          required
-        >
-          <option value="">Mane Category</option>
-          {Object.keys(categoryOptions).map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
+        <div className="grid gap-8 lg:grid-cols-[1.25fr_0.9fr]">
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <label className="block">
+                  <span className="text-sm font-medium text-slate-700">
+                    Product Name
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="e.g. Premium Dog Food"
+                    className="mt-2 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                    value={productName}
+                    onChange={(e) => setProductName(e.target.value)}
+                    required
+                  />
+                </label>
 
-        {category && categoryOptions[category] && (
-          <select
-            className="w-full p-3 border rounded"
-            value={subCategory}
-            onChange={(e) => setSubCategory(e.target.value)}
-            required
-          >
-            <option value="">Select Subcategory</option>
-            {categoryOptions[category].map((sub) => (
-              <option key={sub} value={sub}>
-                {sub}
-              </option>
-            ))}
-          </select>
-        )}
+                <label className="block">
+                  <span className="text-sm font-medium text-slate-700">
+                    Price
+                  </span>
+                  <input
+                    type="number"
+                    placeholder="₹ 0.00"
+                    className="mt-2 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    required
+                  />
+                </label>
+              </div>
 
-        <textarea
-          placeholder="Product Description"
-          className="w-full p-3 border rounded h-28"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
+              <div className="grid gap-6 sm:grid-cols-2">
+                <label className="block">
+                  <span className="text-sm font-medium text-slate-700">
+                    Main Category
+                  </span>
+                  <select
+                    className="mt-2 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                    value={category}
+                    onChange={(e) => {
+                      setCategory(e.target.value);
+                      setSubCategory("");
+                    }}
+                    required
+                  >
+                    <option value="">Select a category</option>
+                    {Object.keys(categoryOptions).map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </label>
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImageFile(e.target.files[0])}
-          className="w-full"
-          required
-          ref={fileInputRef}
-        />
+                <label className="block">
+                  <span className="text-sm font-medium text-slate-700">
+                    Subcategory
+                  </span>
+                  <select
+                    className="mt-2 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                    value={subCategory}
+                    onChange={(e) => setSubCategory(e.target.value)}
+                    required
+                    disabled={!category}
+                  >
+                    <option value="">Choose a subcategory</option>
+                    {category &&
+                      categoryOptions[category]?.map((sub) => (
+                        <option key={sub} value={sub}>
+                          {sub}
+                        </option>
+                      ))}
+                  </select>
+                </label>
+              </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded font-bold text-lg"
-        >
-          {loading ? (
-            <>
-              <ImSpinner className="animate-spin inline-block mr-2" />
-              Uploading...
-            </>
-          ) : (
-            "Add Product"
-          )}
-        </button>
-      </form>
+              <label className="block">
+                <span className="text-sm font-medium text-slate-700">
+                  Product Description
+                </span>
+                <textarea
+                  placeholder="Write a short description of the product"
+                  className="mt-2 h-36 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+              </label>
+
+              <div className="space-y-3">
+                <span className="text-sm font-medium text-slate-700">
+                  Product Image
+                </span>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <label className="inline-flex cursor-pointer items-center rounded-3xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600">
+                    Upload Image
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="sr-only"
+                      ref={fileInputRef}
+                      required
+                    />
+                  </label>
+                  <span className="text-sm text-slate-500">
+                    {imageFile ? imageFile.name : "PNG, JPG or GIF, max 5MB"}
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="mt-3 inline-flex w-full items-center justify-center rounded-3xl bg-slate-900 px-6 py-4 text-lg font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {loading ? (
+                  <>
+                    <ImSpinner className="animate-spin inline-block mr-2" />
+                    Uploading...
+                  </>
+                ) : (
+                  "Add Product"
+                )}
+              </button>
+            </form>
+          </div>
+
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <div className="mb-6 rounded-3xl bg-slate-50 p-5">
+              <p className="text-sm uppercase tracking-[0.35em] text-slate-400">
+                Preview
+              </p>
+              <h3 className="mt-3 text-2xl font-semibold text-slate-900">
+                Product preview
+              </h3>
+              <p className="mt-2 text-sm text-slate-500">
+                Review your product information before saving it to the catalog.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                {imagePreview ? (
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="h-64 w-full rounded-3xl object-cover"
+                  />
+                ) : (
+                  <div className="flex h-64 items-center justify-center rounded-3xl border-dashed border border-slate-300 bg-white text-slate-400">
+                    Image preview will appear here
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-slate-500">Product</p>
+                  <p className="mt-2 text-lg font-semibold text-slate-900">
+                    {productName || "Product name"}
+                  </p>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-3xl bg-slate-50 p-4">
+                    <p className="text-sm text-slate-500">Price</p>
+                    <p className="mt-2 text-xl font-semibold text-slate-900">
+                      {price ? `₹ ${price}` : "₹ 0"}
+                    </p>
+                  </div>
+                  <div className="rounded-3xl bg-slate-50 p-4">
+                    <p className="text-sm text-slate-500">Category</p>
+                    <p className="mt-2 text-lg font-semibold text-slate-900">
+                      {category || "Main category"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-3xl bg-slate-50 p-4">
+                    <p className="text-sm text-slate-500">Subcategory</p>
+                    <p className="mt-2 text-lg font-semibold text-slate-900">
+                      {subCategory || "Subcategory"}
+                    </p>
+                  </div>
+                  <div className="rounded-3xl bg-slate-50 p-4">
+                    <p className="text-sm text-slate-500">Description</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-700">
+                      {description || "A short description will appear here."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
