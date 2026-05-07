@@ -88,7 +88,7 @@ const Home = () => {
         });
 
         const formattedCategories = Object.entries(categoryMap).map(
-          ([name, image]) => ({ name, image })
+          ([name, image]) => ({ name, image }),
         );
         setMainCategories(formattedCategories);
       } catch (err) {
@@ -118,18 +118,23 @@ const Home = () => {
       <section className="relative bg-gradient-to-br from-rose-50 via-teal-50 to-indigo-50 py-32 md:py-48 overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-          <motion.div 
-            animate={{ y: [0, -20, 0], opacity: [0.5, 0.8, 0.5] }} 
+          <motion.div
+            animate={{ y: [0, -20, 0], opacity: [0.5, 0.8, 0.5] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             className="absolute top-10 left-10 w-40 h-40 bg-rose-300/30 rounded-full blur-3xl"
           ></motion.div>
-          <motion.div 
-            animate={{ x: [0, 30, 0], opacity: [0.3, 0.6, 0.3] }} 
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          <motion.div
+            animate={{ x: [0, 30, 0], opacity: [0.3, 0.6, 0.3] }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
             className="absolute bottom-10 right-20 w-64 h-64 bg-teal-300/30 rounded-full blur-3xl"
           ></motion.div>
-          <motion.div 
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }} 
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border-[1px] border-gray-200/50 rounded-full border-dashed"
           ></motion.div>
@@ -137,7 +142,7 @@ const Home = () => {
 
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center px-6 relative z-10">
           {/* Left Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -147,23 +152,38 @@ const Home = () => {
               ✨ Premium Pet Care Solutions
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-gray-900 drop-shadow-sm">
-              <span className="block mb-2 text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-gray-600">MTM Veterinary</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-400">& PetShop</span>
+              <span className="block mb-2 text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-gray-600">
+                MTM Veterinary
+              </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-400">
+                & PetShop
+              </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 max-w-lg leading-relaxed">
-              Your Pet’s Happiness is Our Priority! Discover top-quality medicines, delicious food, and fun accessories for your furry friends. 🐾
+              Your Pet’s Happiness is Our Priority! Discover top-quality
+              medicines, delicious food, and fun accessories for your furry
+              friends. 🐾
             </p>
-            
+
             <div className="flex gap-4">
               <Link to="/shop">
-                <motion.button 
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-teal-500 to-emerald-500 text-white px-8 py-4 rounded-full shadow-xl shadow-teal-500/30 hover:shadow-2xl hover:shadow-teal-500/40 transition-all font-semibold text-lg flex items-center gap-2"
                 >
                   Shop Now
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </motion.button>
               </Link>
@@ -171,14 +191,14 @@ const Home = () => {
           </motion.div>
 
           {/* Right Content - Hero Image */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="relative flex justify-center items-center mt-10 md:mt-0"
           >
             {/* Glassmorphism Card */}
-            <motion.div 
+            <motion.div
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="bg-white/40 border border-white/60 backdrop-blur-xl rounded-[2rem] shadow-2xl p-8 md:p-12 relative z-20"
@@ -190,33 +210,55 @@ const Home = () => {
                 alt="Happy pet looking at products"
               />
             </motion.div>
-            
+
             {/* Decorative Floating Cards */}
-            <motion.div 
+            <motion.div
               animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5,
+              }}
               className="absolute -top-8 -right-4 md:-right-8 bg-white/90 backdrop-blur-md p-3 md:p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 z-30"
             >
               <div className="bg-yellow-100 p-2 rounded-full">
                 <img src={star} className="w-5 h-5 md:w-6 md:h-6" alt="Star" />
               </div>
               <div>
-                <p className="text-xs md:text-sm font-bold text-gray-800">4.9/5</p>
-                <p className="text-[10px] md:text-xs text-gray-500">Top Rated</p>
+                <p className="text-xs md:text-sm font-bold text-gray-800">
+                  4.9/5
+                </p>
+                <p className="text-[10px] md:text-xs text-gray-500">
+                  Top Rated
+                </p>
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }}
-              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              transition={{
+                duration: 4.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
               className="absolute -bottom-6 -left-4 md:-left-8 bg-white/90 backdrop-blur-md p-3 md:p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 z-30"
             >
               <div className="bg-teal-100 p-2 rounded-full">
-                <img src={HappyFace} className="w-5 h-5 md:w-6 md:h-6" alt="Happy Face" />
+                <img
+                  src={HappyFace}
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  alt="Happy Face"
+                />
               </div>
               <div>
-                <p className="text-xs md:text-sm font-bold text-gray-800">10k+</p>
-                <p className="text-[10px] md:text-xs text-gray-500">Happy Pets</p>
+                <p className="text-xs md:text-sm font-bold text-gray-800">
+                  10k+
+                </p>
+                <p className="text-[10px] md:text-xs text-gray-500">
+                  Happy Pets
+                </p>
               </div>
             </motion.div>
           </motion.div>
@@ -232,7 +274,7 @@ const Home = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             {/* Left Image Side */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -247,30 +289,49 @@ const Home = () => {
                 />
                 <div className="absolute inset-0 bg-teal-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
               </div>
-              
+
               {/* Decorative background shape */}
               <div className="absolute inset-0 bg-gradient-to-tr from-teal-400 to-emerald-300 rounded-3xl transform translate-x-6 translate-y-6 -z-10 opacity-70"></div>
-              
+
               {/* Floating Experience Badge */}
-              <motion.div 
+              <motion.div
                 animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 className="absolute -bottom-6 -left-6 bg-white p-4 sm:p-5 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-4 z-20"
               >
                 <div className="bg-orange-100 text-orange-600 p-3 rounded-xl">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 sm:h-8 sm:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-7 w-7 sm:h-8 sm:w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-xl sm:text-2xl font-bold text-gray-900">Expert</h4>
-                  <p className="text-xs sm:text-sm text-gray-500 font-medium uppercase tracking-wide">Pet Care</p>
+                  <h4 className="text-xl sm:text-2xl font-bold text-gray-900">
+                    Expert
+                  </h4>
+                  <p className="text-xs sm:text-sm text-gray-500 font-medium uppercase tracking-wide">
+                    Pet Care
+                  </p>
                 </div>
               </motion.div>
             </motion.div>
 
             {/* Right Content */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -278,46 +339,84 @@ const Home = () => {
               className="w-full lg:pl-8 flex flex-col justify-center mt-10 lg:mt-0"
             >
               <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-orange-600 font-semibold text-sm self-start">
-                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                   <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                 </svg>
-                 About Us
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                About Us
               </div>
-              
+
               <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">
-                Your Trusted <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-400">Partner</span> in Pet Health
+                Your Trusted{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-400">
+                  Partner
+                </span>{" "}
+                in Pet Health
               </h2>
-              
+
               <p className="text-lg text-gray-600 mb-6 leading-relaxed font-medium">
-                Welcome to <span className="text-teal-700 font-bold">MTM Veterinary Medicals & Petshop</span>. We are passionate about keeping your pets healthy and happy with top-quality products and expert care.
+                Welcome to{" "}
+                <span className="text-teal-700 font-bold">
+                  MTM Veterinary Medicals & Petshop
+                </span>
+                . We are passionate about keeping your pets healthy and happy
+                with top-quality products and expert care.
               </p>
-              
+
               <div className="space-y-4 mb-10">
                 {[
                   "Premium veterinary medicines and supplies",
                   "Nutritious, high-quality pet foods",
-                  "Fun and engaging pet accessories"
+                  "Fun and engaging pet accessories",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4">
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 text-emerald-600"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </div>
-                    <span className="text-gray-700 font-semibold text-lg">{item}</span>
+                    <span className="text-gray-700 font-semibold text-lg">
+                      {item}
+                    </span>
                   </div>
                 ))}
               </div>
 
               <Link to="/Doctor">
-                <motion.button 
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-orange-500 to-rose-500 text-white hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300 rounded-full px-8 py-4 font-bold text-lg shadow-md self-start flex items-center gap-2"
                 >
                   Consult A Doctor
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </motion.button>
               </Link>
@@ -330,32 +429,36 @@ const Home = () => {
       <section className="py-20 bg-gradient-to-b from-white to-gray-50/50">
         <div className="container px-4">
           <div className="text-center mb-16 relative">
-             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-             >
-                <div className="inline-flex items-center justify-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-600 font-medium text-sm">
-                   <img src={star} className="w-4 h-4 opacity-70" alt="star" />
-                   Our Collections
-                   <img src={star} className="w-4 h-4 opacity-70" alt="star" />
-                </div>
-                <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight relative inline-block">
-                  Explore Categories
-                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-20 h-1.5 bg-gradient-to-r from-teal-400 to-emerald-400 rounded-full"></div>
-                </h2>
-                <p className="text-gray-500 mt-8 max-w-2xl mx-auto text-lg">
-                  Find everything your pet needs, carefully organized into our premium collections.
-                </p>
-             </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="inline-flex items-center justify-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-600 font-medium text-sm">
+                <img src={star} className="w-4 h-4 opacity-70" alt="star" />
+                Our Collections
+                <img src={star} className="w-4 h-4 opacity-70" alt="star" />
+              </div>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight relative inline-block">
+                Explore Categories
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-20 h-1.5 bg-gradient-to-r from-teal-400 to-emerald-400 rounded-full"></div>
+              </h2>
+              <p className="text-gray-500 mt-8 max-w-2xl mx-auto text-lg">
+                Find everything your pet needs, carefully organized into our
+                premium collections.
+              </p>
+            </motion.div>
           </div>
-          
+
           <div className="w-full -mx-2">
             <Slider {...categorySliderSettings} className="px-2">
               {categorySlides.map((slide, index) => (
                 <div key={index} className="px-3 pb-8 pt-6 outline-none">
-                  <Link to={`/shop?category=${slide.value}`} className="group block focus:outline-none">
+                  <Link
+                    to={`/shop?category=${slide.value}`}
+                    className="group block focus:outline-none"
+                  >
                     <div className="flex flex-col items-center">
                       <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full overflow-hidden bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] group-hover:shadow-[0_20px_40px_rgb(20,184,166,0.2)] border-[6px] border-white transition-all duration-500 ease-out group-hover:-translate-y-3 z-10">
                         {/* Overlay for depth */}
@@ -530,47 +633,218 @@ const Home = () => {
       </section>
 
       {/* Review Section */}
-      <section className="bg-gradient-to-r from-rose-100 to-teal-100 py-28">
-        <div className="container">
-          <div className="flex gap-4 items-center justify-center mb-8">
-            <img className="w-11" src={HappyFace} alt="Happy Face" />
-            <span className="text-3xl font-bold">Happy Customers</span>
-            <img className="w-11" src={HappyFace} alt="Happy Face" />
-          </div>
+      <section className="relative py-32 overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-rose-50 via-white to-teal-50 -z-10"></div>
+
+        {/* Decorative Elements */}
+        <motion.div
+          animate={{ float: [0, 20, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-20 left-10 w-32 h-32 bg-rose-300/20 rounded-full blur-3xl -z-10"
+        ></motion.div>
+        <motion.div
+          animate={{ float: [0, -20, 0] }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+          className="absolute bottom-20 right-10 w-40 h-40 bg-teal-300/20 rounded-full blur-3xl -z-10"
+        ></motion.div>
+
+        <div className="container mx-auto px-6">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="flex gap-4 items-center justify-center mb-6">
+              <motion.img
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="w-12 h-12"
+                src={HappyFace}
+                alt="Happy Face"
+              />
+              <motion.h2
+                className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-500"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                Happy Customers
+              </motion.h2>
+              <motion.img
+                animate={{ rotate: [0, -10, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="w-12 h-12"
+                src={HappyFace}
+                alt="Happy Face"
+              />
+            </div>
+            <motion.p
+              className="text-gray-600 text-lg max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              Join thousands of satisfied pet lovers who trust MTM Veterinary &
+              PetShop
+            </motion.p>
+          </motion.div>
+
+          {/* Reviews Slider */}
           <div className="w-full overflow-hidden">
             <Slider {...reviewSliderSettings}>
-              {review.map((item) => (
-                <div
+              {review.map((item, index) => (
+                <motion.div
                   key={item.id}
-                  className="relative max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md w-56 m-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="px-2"
                 >
-                  <div className="p-3">
-                    <img
-                      className="object-cover rounded-lg"
-                      src={item.img}
-                      alt="Customer Review"
-                    />
-                  </div>
-                  <div className="mt-4 px-5 pb-5">
-                    <p className="mb-5">{item.reviewText}</p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex gap-2">
-                        {[...Array(item.rating)].map((_, index) => (
-                          <img
-                            key={index}
-                            className="w-4"
+                  <motion.div
+                    whileHover={{
+                      y: -10,
+                      boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="relative h-full overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-300 group"
+                  >
+                    {/* Gradient overlay on hover */}
+                    <motion.div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-transparent to-rose-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></motion.div>
+
+                    {/* Star Rating Header */}
+                    <div className="flex items-center justify-between p-4 border-b border-gray-100">
+                      <div className="flex gap-1">
+                        {[...Array(item.rating)].map((_, idx) => (
+                          <motion.img
+                            key={idx}
+                            animate={{ y: [0, -3, 0] }}
+                            transition={{
+                              duration: 0.6,
+                              delay: idx * 0.1,
+                              repeat: Infinity,
+                            }}
+                            className="w-5 h-5 filter drop-shadow"
                             src={Star}
                             alt="Star"
                           />
                         ))}
                       </div>
-                      <p>{item.reviewerName}</p>
+                      <motion.span
+                        className="text-xs font-semibold bg-gradient-to-r from-teal-500 to-emerald-500 text-white px-3 py-1 rounded-full"
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        ⭐ Verified
+                      </motion.span>
                     </div>
-                  </div>
-                </div>
+
+                    {/* Customer Image */}
+                    <div className="p-4 overflow-hidden">
+                      <motion.img
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.3 }}
+                        className="object-cover rounded-xl w-full h-40 border-2 border-gradient-to-br from-teal-200 to-emerald-200"
+                        src={item.img}
+                        alt="Customer"
+                      />
+                    </div>
+
+                    {/* Review Text */}
+                    <div className="px-5 py-4">
+                      <motion.p
+                        className="text-gray-700 text-sm leading-relaxed italic mb-4 line-clamp-3"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.6 }}
+                        viewport={{ once: true }}
+                      >
+                        "{item.reviewText}"
+                      </motion.p>
+
+                      {/* Reviewer Name */}
+                      <motion.div
+                        className="flex items-center gap-3 pt-3 border-t border-gray-100"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        viewport={{ once: true }}
+                      >
+                        <div className="flex-1">
+                          <p className="font-bold text-gray-900 text-sm">
+                            {item.reviewerName}
+                          </p>
+                          <p className="text-xs text-teal-600 font-semibold">
+                            Verified Customer
+                          </p>
+                        </div>
+                        <motion.div
+                          className="text-2xl"
+                          animate={{ rotate: [0, 20, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                          ✓
+                        </motion.div>
+                      </motion.div>
+                    </div>
+
+                    {/* Bottom Accent */}
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ duration: 0.8 }}
+                      viewport={{ once: true }}
+                      style={{ transformOrigin: "left" }}
+                    ></motion.div>
+                  </motion.div>
+                </motion.div>
               ))}
             </Slider>
           </div>
+
+          {/* Trust Stats */}
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            {[
+              { number: "10K+", label: "Happy Customers" },
+              { number: "4.9★", label: "Average Rating" },
+              { number: "100%", label: "Satisfaction" },
+              { number: "24/7", label: "Customer Support" },
+            ].map((stat, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="text-center p-6 rounded-2xl bg-white border border-gray-100 shadow-md hover:shadow-lg transition-all"
+              >
+                <motion.h3
+                  className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-500 mb-2"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  {stat.number}
+                </motion.h3>
+                <p className="text-gray-600 font-semibold">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
     </div>
