@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { updatePageMeta, seoConfig } from "../utils/seoHelper";
 
 import {
   Home,
@@ -39,6 +40,16 @@ const DoctorsHome = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
+
+  useEffect(() => {
+    // Update SEO meta tags for Doctors page
+    updatePageMeta(
+      seoConfig.doctors.title,
+      seoConfig.doctors.description,
+      seoConfig.doctors.keywords,
+      window.location.href,
+    );
+  }, []);
 
   return (
     <div className="min-h-screen relative bg-gradient-to-br from-orange-50 via-pink-50 to-orange-50">
@@ -90,9 +101,11 @@ const DoctorsHome = () => {
                 variants={itemVariants}
                 className="text-xl text-gray-600 leading-relaxed max-w-lg"
               >
-                Connect with certified veterinarians online. Get instant
-                consultations, book appointments, and ensure your furry friends
-                receive expert care from home. 24/7 emergency support available.
+                Connect with certified veterinarians anytime, anywhere. Get
+                expert instant consultations, book appointments conveniently,
+                and ensure your beloved pets receive professional healthcare
+                from the comfort of your home. Round-the-clock emergency support
+                available.
               </motion.p>
 
               <motion.div

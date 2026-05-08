@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { updatePageMeta, seoConfig } from "../utils/seoHelper";
 import heroImage from "../assets/images/mane.png";
 import aboutImage from "../assets/images/aboutus.png";
 import CategorysCard from "../components/Ui/CategorysCard";
@@ -71,6 +72,14 @@ const Home = () => {
   };
 
   useEffect(() => {
+    // Update SEO meta tags
+    updatePageMeta(
+      seoConfig.home.title,
+      seoConfig.home.description,
+      seoConfig.home.keywords,
+      window.location.href,
+    );
+
     const fetchCategories = async () => {
       try {
         const { data, error } = await supabase
@@ -160,9 +169,10 @@ const Home = () => {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 max-w-lg leading-relaxed">
-              Your Pet’s Happiness is Our Priority! Discover top-quality
-              medicines, delicious food, and fun accessories for your furry
-              friends. 🐾
+              Your Pet's Health and Happiness are Our Top Priority! Explore
+              premium veterinary medicines, nutritious pet food, and quality
+              accessories for all your beloved pets. Everything your furry
+              friends need to thrive. 🐾
             </p>
 
             <div className="flex gap-4">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../components/supabase/supabaseClient";
 import { Link } from "react-router-dom";
+import { updatePageMeta, seoConfig } from "../utils/seoHelper";
 import { Star, Clock, MapPin } from "lucide-react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { ImSpinner } from "react-icons/im";
@@ -31,6 +32,16 @@ const DoctorListing = () => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    // Update SEO meta tags for Doctors listing page
+    updatePageMeta(
+      seoConfig.doctorsList.title,
+      seoConfig.doctorsList.description,
+      seoConfig.doctorsList.keywords,
+      window.location.href,
+    );
+  }, []);
 
   useEffect(() => {
     fetchDoctors();

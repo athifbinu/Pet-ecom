@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CommonSection from "../components/Ui/CommonSection";
 import ProductCard from "../components/Ui/ProductCard";
 import { useSearchParams } from "react-router-dom";
+import { updatePageMeta, seoConfig } from "../utils/seoHelper";
 import { supabase } from "../components/supabase/supabaseClient";
 
 const Shop = () => {
@@ -12,6 +13,16 @@ const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState(initialCategory);
+
+  useEffect(() => {
+    // Update SEO meta tags
+    updatePageMeta(
+      seoConfig.shop.title,
+      seoConfig.shop.description,
+      seoConfig.shop.keywords,
+      window.location.href,
+    );
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,7 +42,7 @@ const Shop = () => {
   const handleCategoryChange = (e) => {
     const newCategory = e.target.value;
     setCategoryFilter(newCategory);
-    
+
     if (newCategory) {
       setSearchParams({ category: newCategory });
     } else {
@@ -44,12 +55,12 @@ const Shop = () => {
       const matchesSearch = product.name
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
-      
+
       // Case-insensitive match or exact match depending on data, but here exact match is fine
       const matchesCategory = categoryFilter
         ? product.category === categoryFilter
         : true;
-        
+
       return matchesSearch && matchesCategory;
     });
 
