@@ -10,20 +10,20 @@ import Telegram from "../../../assets/icons/telegram.png";
 
 const AdminFooter = () => {
   return (
-    <footer class="bg-white">
-      <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-        <div class="md:flex md:justify-between">
-          <div class="mb-6 md:mb-0">
+    <footer className="bg-white">
+      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <div className="md:flex md:justify-between">
+          <div className="mb-6 md:mb-0">
             <Link to="#" class="flex items-center">
-              <img src={logo} class="h-14 mr-3" alt="Logo" />
-              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">
+              <img src={logo} className="h-14 mr-3" alt="Logo" />
+              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">
                 Mtm Petshop
               </span>
             </Link>
           </div>
-          <div class="flex  gap-20">
+          <div className="flex  gap-20">
             <div>
-              <h2 class="mb-6 text-sm font-semibold uppercase text-black">
+              <h2 className="mb-6 text-sm font-semibold uppercase text-black">
                 Contact Us
               </h2>
               <div className="text-gray-700 mb-3">
@@ -42,11 +42,11 @@ const AdminFooter = () => {
             </div>
 
             <div>
-              <h2 class="mb-6 text-sm font-semibold uppercase text-black">
+              <h2 className="mb-6 text-sm font-semibold uppercase text-black">
                 Account
               </h2>
-              <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                <li class="mb-4">
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li className="mb-4">
                   <Link to="#" className="hover:underline ">
                     Login
                   </Link>
@@ -60,11 +60,11 @@ const AdminFooter = () => {
             </div>
 
             <div>
-              <h2 class="mb-6 text-sm font-semibold uppercase text-black">
+              <h2 className="mb-6 text-sm font-semibold uppercase text-black">
                 Company
               </h2>
-              <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                <li class="mb-4">
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li className="mb-4">
                   <Link to="#" className="hover:underline">
                     About us
                   </Link>
@@ -83,17 +83,17 @@ const AdminFooter = () => {
             </div>
 
             <div>
-              <h2 class="mb-6 text-sm font-semibold uppercase text-black">
+              <h2 className="mb-6 text-sm font-semibold uppercase text-black">
                 Resources
               </h2>
-              <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                <li class="mb-4">
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li className="mb-4">
                   <Link to="#" className="hover:underline">
                     Help
                   </Link>
                 </li>
                 <li>
-                  <a href="#" class="hover:underline">
+                  <a href="#" className="hover:underline">
                     Terms &amp; Conditions
                   </a>
                 </li>
@@ -103,16 +103,16 @@ const AdminFooter = () => {
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
 
-        <div class="sm:flex sm:items-center sm:justify-between">
-          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-600">
+        <div className="sm:flex sm:items-center sm:justify-between">
+          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-600">
             © 2023{" "}
-            <a href="https://flowbite.com/" class="hover:underline">
+            <a href="https://flowbite.com/" className="hover:underline">
               Mtm ™
             </a>
             . All Rights Reserved.
           </span>
 
-          <div class="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
+          <div className="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
             <Link to="#">
               <img src={Whatsapp} className="w-5" alt="" />
             </Link>

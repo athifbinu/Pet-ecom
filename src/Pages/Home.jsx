@@ -29,6 +29,7 @@ import slidernine from "../assets/images/pharmacy.jpeg";
 import sliderten from "../assets/images/polutry.jpeg";
 
 import { supabase } from "../components/supabase/supabaseClient";
+import FlashSaleSection from "../components/Ui/FlashSaleSection";
 
 const Home = () => {
   const [mainCategories, setMainCategories] = useState([]);
@@ -493,6 +494,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Flash Sale Section */}
+      <FlashSaleSection />
 
       {/* Shop by Foods */}
       <section>

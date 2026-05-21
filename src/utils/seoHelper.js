@@ -139,11 +139,4 @@ export const seoConfig = {
     keywords:
       "pet care tips, pet health, pet advice, pet training, pet nutrition, pet wellness",
   },
-  careers: {
-    title: "Careers at MTM | Join Our Pet Care Team",
-    description:
-      "Build your career with MTM Veterinary & PetShop. Explore exciting job opportunities in pet care and veterinary services.",
-    keywords:
-      "careers, jobs, employment, pet care jobs, veterinary positions, hiring",
-  },
 };
