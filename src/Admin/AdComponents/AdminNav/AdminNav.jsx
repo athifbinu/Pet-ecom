@@ -34,6 +34,14 @@ const AdminNav = () => {
               </li>
               <li>
                 <Link
+                  to="/admin/addProduct"
+                  class="text-gray-70 hover:text-orange-400"
+                >
+                  Add Offer Product
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/admin/Booking"
                   class="text-gray-70 hover:text-orange-400"
                 >

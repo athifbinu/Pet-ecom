@@ -176,6 +176,7 @@ const AddProduct = () => {
   const [loading, setLoading] = useState(false);
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
+  const [originalPrice, setOriginalPrice] = useState("");
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -213,6 +214,7 @@ const AddProduct = () => {
         {
           name: productName,
           price: Number(price),
+          originalPrice: originalPrice ? Number(originalPrice) : null,
           category,
           subcategory: subCategory,
           description,
@@ -241,6 +243,14 @@ const AddProduct = () => {
       setLoading(false);
     }
   };
+
+  const discountPercent =
+    originalPrice && price && Number(originalPrice) > Number(price)
+      ? Math.round(
+          ((Number(originalPrice) - Number(price)) / Number(originalPrice)) *
+            100,
+        )
+      : null;
 
   return (
     <div className="max-w-6xl mx-auto py-10 px-4">
@@ -280,14 +290,24 @@ const AddProduct = () => {
                   <span className="text-sm font-medium text-slate-700">
                     Price
                   </span>
-                  <input
-                    type="number"
-                    placeholder="₹ 0.00"
-                    className="mt-2 w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                  />
+                  <div className="mt-2 grid gap-3">
+                    <input
+                      type="number"
+                      placeholder="₹ 0.00"
+                      className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      required
+                    />
+
+                    <input
+                      type="number"
+                      placeholder="Original price (optional)"
+                      className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 outline-none text-sm transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                      value={originalPrice}
+                      onChange={(e) => setOriginalPrice(e.target.value)}
+                    />
+                  </div>
                 </label>
               </div>
 
@@ -428,6 +448,18 @@ const AddProduct = () => {
                     <p className="mt-2 text-xl font-semibold text-slate-900">
                       {price ? `₹ ${price}` : "₹ 0"}
                     </p>
+                    {originalPrice && Number(originalPrice) > Number(price) && (
+                      <div className="mt-2">
+                        <p className="text-sm text-green-600">
+                          Offer price shown; original ₹{originalPrice}
+                        </p>
+                        {discountPercent ? (
+                          <p className="text-sm text-red-600">
+                            {discountPercent}% off
+                          </p>
+                        ) : null}
+                      </div>
+                    )}
                   </div>
                   <div className="rounded-3xl bg-slate-50 p-4">
                     <p className="text-sm text-slate-500">Category</p>

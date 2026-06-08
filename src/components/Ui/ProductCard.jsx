@@ -79,7 +79,7 @@ const ProductCard = ({ item }) => {
     >
       {/* Badges */}
       <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
-        {item.isOnSale && (
+        {(item.originalPrice && Number(item.originalPrice) > Number(item.price)) && (
           <motion.div 
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}

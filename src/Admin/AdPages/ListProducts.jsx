@@ -11,6 +11,7 @@ const ListProducts = () => {
   const [editForm, setEditForm] = useState({
     name: "",
     price: "",
+    originalPrice: "",
     category: "",
     subcategory: "",
     description: "",
@@ -72,6 +73,7 @@ const ListProducts = () => {
     setEditForm({
       name: product.name,
       price: product.price,
+      originalPrice: product.originalPrice || "",
       category: product.category,
       subcategory: product.subcategory,
       description: product.description,
@@ -84,9 +86,15 @@ const ListProducts = () => {
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
+    const updateData = {
+      ...editForm,
+      price: Number(editForm.price),
+      originalPrice: editForm.originalPrice ? Number(editForm.originalPrice) : null,
+    };
+
     const { error } = await supabase
       .from("products")
-      .update(editForm)
+      .update(updateData)
       .eq("id", editProduct.id);
 
     if (error) {
@@ -258,8 +266,16 @@ const ListProducts = () => {
                 value={editForm.price}
                 onChange={handleEditChange}
                 className="w-full p-2 border rounded"
-                placeholder="Price"
+                placeholder="Sale Price"
                 required
+              />
+              <input
+                name="originalPrice"
+                type="number"
+                value={editForm.originalPrice}
+                onChange={handleEditChange}
+                className="w-full p-2 border rounded"
+                placeholder="Original Price (optional)"
               />
               <input
                 name="category"
