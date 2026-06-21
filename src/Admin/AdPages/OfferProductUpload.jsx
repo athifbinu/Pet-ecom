@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { ImSpinner } from "react-icons/im";
+import { supabase } from "../../components/supabase/supabaseClient.js";
 
 const TABS = [
   "General",
@@ -59,14 +60,85 @@ export default function OfferProductUpload() {
     return Math.round(((o - p) / o) * 100);
   })();
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      // UI-only demo: just reset and simulate success
+
+    try {
+      const firstFile = files?.[0];
+
+      if (!firstFile) {
+        setLoading(false);
+        return alert("Please upload an image.");
+      }
+
+      const bucket = "product-images";
+      const fileExt = firstFile.name.split(".").pop();
+      const fileName = `${Date.now()}.${fileExt}`;
+      const filePath = `products/${fileName}`;
+
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from(bucket)
+        .upload(filePath, firstFile, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (uploadError) {
+        console.error("Supabase upload error:", uploadError);
+        throw uploadError;
+      }
+
+      const { data: publicUrlData, error: publicUrlError } =
+        await supabase.storage.from(bucket).getPublicUrl(filePath);
+
+      if (publicUrlError) {
+        console.error("Error getting public URL:", publicUrlError);
+        throw publicUrlError;
+      }
+
+      const { data: insertData, error: insertError } = await supabase
+        .from("Offer_products")
+        .insert([
+          {
+            ProductName: name,
+            Prize: price ? Number(price) : null,
+            discountPrize: originalPrice ? Number(originalPrice) : null,
+            MainCategory: category,
+            Subcategory: subCategory,
+            Description: description,
+            Img: publicUrlData?.publicUrl || null,
+          },
+        ]);
+
+      if (insertError) {
+        console.error("Supabase insert error:", insertError);
+        throw insertError;
+      }
+
+      alert("Offer product added successfully!");
+
+      // reset form
+      setName("");
+      setSku("");
+      setCategory("");
+      setSubCategory("");
+      setDescription("");
+      setPrice("");
+      setOriginalPrice("");
+      setFiles([]);
+      setPreviews([]);
+      if (fileRef.current) fileRef.current.value = null;
+    } catch (error) {
+      console.error("Error adding offer product:", error);
+      const msg =
+        (error && error.message) ||
+        (error && error.error) ||
+        "Failed to add offer product.";
+      alert(msg);
+    } finally {
       setLoading(false);
-      alert("Offer product (UI) submitted — this is a demo preview.");
-    }, 900);
+    }
   };
 
   return (

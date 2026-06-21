@@ -20,55 +20,37 @@ const AdminNav = () => {
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
-                <Link to="/admin" class="text-gray-70 hover:text-orange-400">
+                <Link to="/admin" className="text-gray-70 hover:text-orange-400">
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/admin/addProduct"
-                  class="text-gray-70 hover:text-orange-400"
-                >
+                <Link to="/admin/addProduct" className="text-gray-70 hover:text-orange-400">
                   Add Product
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/admin/addProduct"
-                  class="text-gray-70 hover:text-orange-400"
-                >
+                <Link to="/admin/addProduct" className="text-gray-70 hover:text-orange-400">
                   Add Offer Product
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/admin/Booking"
-                  class="text-gray-70 hover:text-orange-400"
-                >
-                  Add doctor's
+                <Link to="/admin/Booking" className="text-gray-70 hover:text-orange-400">
+                  Add doctors
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/admin/DoctorListing"
-                  class="text-gray-70 hover:text-orange-400"
-                >
-                  List doctor's
+                <Link to="/admin/DoctorListing" className="text-gray-70 hover:text-orange-400">
+                  List doctors
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/admin/products"
-                  class="text-gray-70 hover:text-orange-400"
-                >
+                <Link to="/admin/products" className="text-gray-70 hover:text-orange-400">
                   List Products
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/admin/orders"
-                  class="text-gray-70 hover:text-orange-400"
-                >
+                <Link to="/admin/orders" className="text-gray-70 hover:text-orange-400">
                   List Orders
                 </Link>
               </li>

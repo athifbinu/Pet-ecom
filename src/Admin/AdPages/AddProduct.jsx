@@ -214,7 +214,7 @@ const AddProduct = () => {
         {
           name: productName,
           price: Number(price),
-          originalPrice: originalPrice ? Number(originalPrice) : null,
+          original_price: originalPrice ? Number(originalPrice) : null,
           category,
           subcategory: subCategory,
           description,

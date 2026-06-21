@@ -73,7 +73,7 @@ const ListProducts = () => {
     setEditForm({
       name: product.name,
       price: product.price,
-      originalPrice: product.originalPrice || "",
+      originalPrice: product.original_price || "",
       category: product.category,
       subcategory: product.subcategory,
       description: product.description,
@@ -89,8 +89,13 @@ const ListProducts = () => {
     const updateData = {
       ...editForm,
       price: Number(editForm.price),
-      originalPrice: editForm.originalPrice ? Number(editForm.originalPrice) : null,
+      original_price: editForm.originalPrice
+        ? Number(editForm.originalPrice)
+        : null,
     };
+
+    // remove camelCase key before sending to DB
+    delete updateData.originalPrice;
 
     const { error } = await supabase
       .from("products")

@@ -14,7 +14,7 @@ const AdminFooter = () => {
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <Link to="#" class="flex items-center">
+            <Link to="#" className="flex items-center">
               <img src={logo} className="h-14 mr-3" alt="Logo" />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">
                 Mtm Petshop
